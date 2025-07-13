@@ -14,8 +14,10 @@ import { useFavourites } from '../../stores/FavouritesStore';
 
 import Typography from '../ui/Typography';
 import Button from '../ui/Button';
+import Card from '../ui/Card';
 
 import GameCard from './GameCard';
+import PopularGames from './PopularGames';
 
 const GameSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -149,7 +151,7 @@ const GameSearch = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between flex-wrap gap-4">
+      <Card className="relative -mt-20 mx-8 md:mx-42 flex items-center justify-between flex-wrap gap-4">
         <div className="flex flex-col flex-1 items-end">
 
           <div className="relative w-full flex gap-2 flex-wrap flex-col sm:flex-row">
@@ -248,8 +250,8 @@ const GameSearch = () => {
             <Typography
               variant="caption"
               align="right"
-              // color="muted"
-              className="mt-1"
+              color="muted"
+              className="mt-1 -mb-4"
             >
               {hasSearched && !isSearching && searchResults.length > 0 && (
                 <>
@@ -267,79 +269,83 @@ const GameSearch = () => {
               variant="caption"
               align="right"
               color="muted"
-              className="mt-1"
+              className="mt-1 -mb-4"
             >
               Search powered by <a href="https://www.igdb.com/" target="_blank">IGDB</a>
             </Typography>
           </div>
         </div>
-      </div>
+      </Card>
 
-
-      {isSearching || hasSearched || error ? (
-        <div className="w-full max-w-6xl mx-auto p-4">
-          {isSearching && (
-            <div className="flex flex-col items-center text-center py-12">
-              <LoaderCircle className="w-12 h-12 mb-4 text-blue-600 animate-spin" />
-              <Typography
-                variant="h3"
-                align="center"
-                className="mb-4"
-              >
-                Searching
-              </Typography>
-              <Typography
-                variant="body"
-                align="center"
-              >
-                {loadingMessage}
-              </Typography>
-            </div>
-          )}
-
-          {/* Error Message */}
-          {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <div className="flex items-center">
-                <Frown className="w-5 h-5 text-red-400 mr-2" />
-                <span className="text-red-700">Error: {error}</span>
+      <Card className="mt-8">
+        {isSearching || hasSearched || error ? (
+          <div className="w-full max-w-6xl mx-auto p-4">
+            {isSearching && (
+              <div className="flex flex-col items-center text-center py-12">
+                <LoaderCircle className="w-12 h-12 mb-4 text-blue-600 animate-spin" />
+                <Typography
+                  variant="h3"
+                  align="center"
+                  className="mb-4"
+                >
+                  Searching
+                </Typography>
+                <Typography
+                  variant="body"
+                  align="center"
+                >
+                  {loadingMessage}
+                </Typography>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Search Results */}
-          {hasSearched && !isSearching && (
-            <div>
-              {searchResults.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-                  {searchResults.map((game, index) => (
-                    <GameCard key={game.id || index} game={game} />
-                  ))}
+            {/* Error Message */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div className="flex items-center">
+                  <Frown className="w-5 h-5 text-red-400 mr-2" />
+                  <span className="text-red-700">Error: {error}</span>
                 </div>
-              ) : (
-                !isSearching && debouncedSearchTerm.length >= 2 && (
-                  <div className="flex flex-col items-center text-center py-12">
-                    <Frown className="w-12 h-12 mb-4 text-gray-400" />
-                    <Typography
-                      variant="h3"
-                      align="center"
-                      className="mb-4"
-                    >
-                      No Games Found
-                    </Typography>
-                    <Typography
-                      variant="body"
-                      align="center"
-                    >
-                      Try searching for a different game title
-                    </Typography>
+              </div>
+            )}
+
+            {/* Search Results */}
+            {hasSearched && !isSearching && (
+              <div>
+                {searchResults.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                    {searchResults.map((game, index) => (
+                      <GameCard key={game.id || index} game={game} />
+                    ))}
                   </div>
-                )
-              )}
-            </div>
-          )}
-        </div>
-      ) : null}
+                ) : (
+                  !isSearching && debouncedSearchTerm.length >= 2 && (
+                    <div className="flex flex-col items-center text-center py-12">
+                      <Frown className="w-12 h-12 mb-4 text-gray-400" />
+                      <Typography
+                        variant="h3"
+                        align="center"
+                        className="mb-4"
+                      >
+                        No Games Found
+                      </Typography>
+                      <Typography
+                        variant="body"
+                        align="center"
+                      >
+                        Try searching for a different game title
+                      </Typography>
+                    </div>
+                  )
+                )}
+              </div>
+            )}
+          </div>
+        ) : (
+          <PopularGames debouncedSearchTerm={debouncedSearchTerm} />
+        )}
+      </Card>
+
     </>
     
   );

@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import {
   Menu,
-  Flame,
+  Search,
   Crown
 } from 'lucide-react';
 
@@ -20,9 +20,9 @@ const TopNav = ({}) => {
 
   const links = [
     {
-      name: "Popular",
+      name: "Search",
       link: "/",
-      icon: <Flame className="w-6 h-6" />,
+      icon: <Search className="w-6 h-6" />,
     },
     {
       name: "Collection",
