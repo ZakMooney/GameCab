@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --color-base-text: var(--color-gray-600);
+  --color-base-text-dark: var(--color-gray-400);
+
+  --color-heading-text: var(--color-gray-900);
+  --color-heading-text-dark: var(--color-gray-100);
+
+  --color-bg-base: var(--color-gray-50);
+  --color-bg-base-dark: var(--color-gray-900);
+
+  --color-bg-content: var(--color-white);
+  --color-bg-content-dark: var(--color-gray-800);
+
+  --color-card-border: var(--color-gray-200);
+  --color-card-border-dark: var(--color-gray-700);
+
+  --color-primary: var(--color-blue-600);
+  --color-primary-dark: var(--color-blue-400);
+
+  --color-secondary: var(--color-gray-600);
+  --color-secondary-dark: var(--color-gray-400);
+
+
+  --color-info: var(--color-blue-600);
+  --color-info-dark: var(--color-blue-400);
+  --color-success: var(--color-green-600);
+  --color-success-dark: var(--color-green-400);
+  --color-warning: var(--color-amber-600);
+  --color-warning-dark: var(--color-amber-400);
+  --color-danger: var(--color-red-600);
+  --color-danger-dark: var(--color-red-400);
+
+  --color-gray-850: rgb(24,33,47);
+
+}
