@@ -25,7 +25,6 @@ const GameSearch = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const filterRef = useRef(null);
@@ -36,6 +35,7 @@ const GameSearch = () => {
     error,
   } = useIGDB();
   const { 
+    favouritesCount,
     selectedCategories, 
     setSelectedCategories,
   } = useFavourites();
@@ -156,6 +156,32 @@ const GameSearch = () => {
 
           <div className="relative w-full flex gap-2 flex-wrap flex-col sm:flex-row">
             <div className="relative flex-1">
+              <div className="w-full flex justify-between mb-1 -mt-2 md:-mt-4">
+                <Typography
+                  variant="caption"
+                  align="right"
+                  color="muted"
+                >
+                  {hasSearched && !isSearching && searchResults.length > 0 && (
+                    <>
+                      Found {searchResults.length} game{searchResults.length !== 1 ? 's' : ''}
+                    </>
+                  )}
+                  {hasSearched && !isSearching && searchResults.length === 0 && debouncedSearchTerm.length >= 2 && (
+                      <>
+                        No games found
+                      </>
+                    )}
+                </Typography>
+
+                <Typography
+                  variant="caption"
+                  align="right"
+                  color="muted"
+                >
+                  Powered by <a href="https://www.igdb.com/" target="_blank">IGDB</a>
+                </Typography>
+              </div>
               <input
                 type="text"
                 value={searchTerm}
@@ -179,20 +205,39 @@ const GameSearch = () => {
               )}
             </div>
 
+          </div>
+
+          <div className="w-full flex justify-between mt-4">
+            <div>
+              <Button
+                variant={favouritesCount > 0 ? 'primary' : 'secondary'}
+                size="lg"
+                className="relative"
+                disabled={!favouritesCount > 0}
+              >
+                Your Collection
+                {favouritesCount > 0 ? (
+                  <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 dark:bg-red-400 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                    {favouritesCount}
+                  </div>
+                ) : null}
+              </Button>              
+            </div>
+            <div>
             <div className="relative">
               <Button
                 variant="secondary"
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                 icon={<Filter className="w-5 h-5 text-gray-600" />}
-                size="md"
+                size="lg"
                 className="h-full w-full"
               >
                 <div className="relative flex items-center">
-                  <span className="block sm:hidden ml-2">
+                  <span>
                     Filters
                   </span>
                   {getSelectedCategoriesCount() > 0 && (
-                    <span className="ml-1 sm:ml-0 opacity-100 sm:opacity-60">
+                    <span className="ml-1 sm:ml-1 opacity-100 sm:opacity-60">
                       ({getSelectedCategoriesCount()})
                     </span>
                   )}  
@@ -244,35 +289,7 @@ const GameSearch = () => {
                   </div>
                 </div>
               )}
-          </div>
-
-          <div className="w-full flex justify-between">
-            <Typography
-              variant="caption"
-              align="right"
-              color="muted"
-              className="mt-1 -mb-4"
-            >
-              {hasSearched && !isSearching && searchResults.length > 0 && (
-                <>
-                  Found {searchResults.length} game{searchResults.length !== 1 ? 's' : ''}
-                </>
-              )}
-              {hasSearched && !isSearching && searchResults.length === 0 && debouncedSearchTerm.length >= 2 && (
-                  <>
-                    No games found
-                  </>
-                )}
-            </Typography>
-
-            <Typography
-              variant="caption"
-              align="right"
-              color="muted"
-              className="mt-1 -mb-4"
-            >
-              Search powered by <a href="https://www.igdb.com/" target="_blank">IGDB</a>
-            </Typography>
+            </div>
           </div>
         </div>
       </Card>
