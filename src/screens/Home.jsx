@@ -9,15 +9,13 @@ import FavouritesStats from "../components/Home/FavouritesStats";
 
 import Typography from "../components/ui/Typography";
 import Card from "../components/ui/Card";
-import Button from "../components/ui/Button";
-import ThemeToggle from "../components/ui/ThemeToggle";
 
 const Home = () => {
   const { 
     favouritesCount, 
   } = useFavourites();
   return (
-    <>
+    <div className="p-4">
       <Card className="mb-4 md:mb-8">
         <GameSearch />
       </Card>
@@ -78,7 +76,7 @@ const Home = () => {
           </div>
         )
       }
-    </>
+    </div>
   );
 };
 

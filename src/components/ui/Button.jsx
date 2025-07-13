@@ -96,11 +96,11 @@ const Button = ({
   };
 
   const sizes = {
-    xs: 'px-2.5 py-1.5 text-xs gap-1',
-    sm: 'px-3 py-2 text-sm gap-1.5',
-    md: 'px-4 py-2.5 text-sm gap-2',
-    lg: 'px-6 py-3 text-base gap-2.5',
-    xl: 'px-8 py-4 text-lg gap-3',
+    xs: 'px-1.5 md:px-2.5 py-1.5 text-xs gap-1',
+    sm: 'px-2 md:px-3 py-2 text-sm gap-1.5',
+    md: 'px-2.5 md:px-4 py-2.5 text-sm gap-2',
+    lg: 'px-3 md:px-6 py-3 text-base gap-2.5',
+    xl: 'px-4 md:px-8 py-4 text-lg gap-3',
   };
 
   const LoadingSpinner = () => (

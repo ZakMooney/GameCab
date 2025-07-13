@@ -34,6 +34,6 @@
   --color-danger: var(--color-red-600);
   --color-danger-dark: var(--color-red-400);
 
+  --color-gray-750: rgb(27, 37, 52);
   --color-gray-850: rgb(24,33,47);
-
 }

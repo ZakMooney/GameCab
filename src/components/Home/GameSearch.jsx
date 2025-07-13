@@ -12,11 +12,8 @@ import useIGDB from '../../hooks/useIGDB';
 import { useRandomLoadingMessage } from '../../helpers/Loading';
 import { useFavourites } from '../../stores/FavouritesStore';
 
-import GameCabnetLogo from '../../assets/gamecabnet_logo.svg?react';
-
 import Typography from '../ui/Typography';
 import Button from '../ui/Button';
-import ThemeToggle from '../ui/ThemeToggle';
 
 import GameCard from './GameCard';
 
@@ -153,17 +150,7 @@ const GameSearch = () => {
   return (
     <>
       <div className="flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <GameCabnetLogo className="text-gray-900 dark:text-white"/>
-          <Typography
-            variant="body"
-            className="mb-2"
-          >
-            Your personal gaming collection
-          </Typography>
-          <ThemeToggle />
-        </div>
-        <div className="flex flex-col flex-1 items-end max-w-[420px]">
+        <div className="flex flex-col flex-1 items-end">
 
           <div className="relative w-full flex gap-2 flex-wrap flex-col sm:flex-row">
             <div className="relative flex-1">
