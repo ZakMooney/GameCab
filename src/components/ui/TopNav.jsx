@@ -47,7 +47,7 @@ const TopNav = ({}) => {
             />
 
             <div className="flex">
-              <GameCabnetLogo className="text-gray-900 dark:text-white max-h-[32px] md:max-h-[42px]"/>
+              <GameCabnetLogo className="transition-all duration-200 text-gray-900 dark:text-white max-h-[32px] md:max-h-[42px]"/>
             </div>
 
             <div className="flex p-6 md:hidden"></div>

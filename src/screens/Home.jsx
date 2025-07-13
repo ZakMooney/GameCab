@@ -1,16 +1,8 @@
-import React, { useState } from 'react';
-import { Heart } from 'lucide-react';
-
-import { useFavourites } from '../stores/FavouritesStore';
+import React from 'react';
 
 import HeroImg from '../assets/hero.webp';
 
 import GameSearch from "../components/Home/GameSearch";
-import FavouritesDisplay from "../components/Home/FavouritesDisplay";
-import FavouritesStats from "../components/Home/FavouritesStats";
-
-import Typography from "../components/ui/Typography";
-import Card from "../components/ui/Card";
 
 const Home = () => {
   return (

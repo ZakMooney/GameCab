@@ -226,28 +226,21 @@ const FavouritesDisplay = () => {
                 This will permanently remove all {favouritesCount} games from your favourites. This action cannot be undone.
               </Typography>
 
-              <div className="flex gap-3">
-              <Button
-                variant="danger"
-                icon={<Pencil className="w-4 h-4" />}
-                onClick={() => setIsEditMode(!isEditMode)}
-                disabled={isDragMode && (sortBy === 'custom')}
-              >
-                {isEditMode ? 'Done' : 'Edit'}
-              </Button>
-
-                <button
+              <div className="flex gap-4">
+                <Button
+                  variant="secondary"
                   onClick={() => setShowClearConfirm(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colours"
+                  className="w-full"
                 >
                   Cancel
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="danger"
                   onClick={handleClearFavourites}
-                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colours"
+                  className="w-full"
                 >
                   Clear All
-                </button>
+                </Button>
               </div>
             </div>
           </Card>

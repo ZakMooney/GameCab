@@ -24,7 +24,7 @@ const DraggableGameCard = ({
   if (!game) {
     return (
       <div
-        className="group rounded-r-md rounded-l-md bg-neutral-300 shadow-sm  transition-all duration-200 relative overflow-hidden cursor-default min-h-[160px]"
+        className="group rounded-r-md rounded-l-md bg-neutral-300 shadow-sm transition-all duration-200 relative overflow-hidden cursor-default min-h-[160px] w-full"
       >
         <div className="text-center relative bg-linear-to-b from-zinc-500 via-stone-600 to-zinc-900 w-full max-w-[160px] h-full shadow-md px-2 flex justify-center items-center">
           <Typography
@@ -131,7 +131,7 @@ const DraggableGameCard = ({
       {isDragMode ? (
         <>
           <div
-            className="absolute flex flex-row items-center justify-between top-0 h-[42px] w-full z-10 pl-1 pr-2 transition-all duration-200 bg-neutral-900/60 group-hover:bg-neutral-900/80 "
+            className="absolute flex flex-row items-center justify-between top-0 h-[42px] w-full z-10 pl-1 pr-2 transition-all duration-200 bg-neutral-900/60 group-hover:bg-neutral-900/80"
           >
             <div>
               <GripVertical 
@@ -172,7 +172,7 @@ const DraggableGameCard = ({
 
       {game.cover?.url ? (
         <div className="text-center relative w-full max-w-[160px] h-full shadow-md">
-          <div className="absolute flex flex-col items-center bottom-0 opacity-0 group-hover:opacity-100 transition-opacity p-2 pt-10 bg-gradient-to-t from-neutral-900/80 via-neutral-900/80 to-neutral-900/0">
+          <div className="absolute flex flex-col items-center bottom-0 opacity-0 group-hover:opacity-100 transition-opacity p-2 pt-10 bg-gradient-to-t from-neutral-900/80 via-neutral-900/80 to-neutral-900/0 w-full">
             <Typography
               variant="gameTitle"
               align="center"

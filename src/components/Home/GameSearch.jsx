@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
+
 import {
   Trophy,
   Search,
@@ -28,6 +30,7 @@ const GameSearch = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const filterRef = useRef(null);
+  const navigate = useNavigate();
 
   const {
     searchGames,
@@ -210,14 +213,14 @@ const GameSearch = () => {
           <div className="w-full flex justify-between mt-4">
             <div>
               <Button
+                onClick={() => navigate('/collection')}
                 variant={favouritesCount > 0 ? 'primary' : 'secondary'}
                 size="lg"
                 className="relative"
-                disabled={!favouritesCount > 0}
               >
                 Your Collection
                 {favouritesCount > 0 ? (
-                  <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 dark:bg-red-400 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                  <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 dark:bg-red-400 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
                     {favouritesCount}
                   </div>
                 ) : null}
