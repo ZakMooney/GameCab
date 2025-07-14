@@ -21,7 +21,7 @@ const Button = ({
   const baseStyles = `
     cursor-pointer inline-flex items-center justify-center font-medium rounded-lg
     transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2
-    disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none
+    disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none
     ${loading ? 'cursor-wait' : ''}
     ${fullWidth ? 'w-full' : ''}
   `.trim();

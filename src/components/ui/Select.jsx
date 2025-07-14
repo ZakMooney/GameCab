@@ -25,7 +25,7 @@ const Select = ({
     focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 focus:border-gray-300 outline-none
     transition-all duration-200
     text-gray-700 dark:text-gray-200
-    disabled:bg-gray-50 disabled:text-gray-500 dark:disabled:bg-gray-600 dark:disabled:text-gray-700 disabled:cursor-default
+    disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none
     ${fullWidth ? 'w-full' : ''}
   `.trim();
 
