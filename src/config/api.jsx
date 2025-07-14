@@ -3,7 +3,7 @@ const config = {
     apiBaseURL: 'http://localhost:3001/api'
   },
   production: {
-    apiBaseURL: 'https://your-deployed-backend.com/api' // TEMP TODO
+    apiBaseURL: 'https://gamecab.net/api'
   }
 };
 
