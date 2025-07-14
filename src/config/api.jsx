@@ -1,11 +1,11 @@
 const config = {
   development: {
     // apiBaseURL: 'http://localhost:3001/api'
-    apiBaseURL: '/api' // temp todo
+    apiBaseURL: '/api'
   },
   production: {
     // apiBaseURL: 'https://gamecab.net/api'
-    apiBaseURL: '/api' // temp todo
+    apiBaseURL: '/api'
   }
 };
 
