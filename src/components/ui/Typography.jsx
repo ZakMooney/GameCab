@@ -11,17 +11,17 @@ const Typography = ({
   ...props
 }) => {
   const variantStyles = {
-    h1: 'text-4xl @md:text-5xl @lg:text-6xl font-bold',
-    h1Icon: 'text-4xl @md:text-5xl @lg:text-6xl font-bold flex items-center gap-3',
-    h2: 'text-3xl @md:text-4xl @lg:text-5xl font-semibold',
-    h3: 'text-2xl @md:text-3xl @lg:text-4xl font-semibold',
-    h4: 'text-xl @md:text-2xl @lg:text-3xl font-medium',
-    h5: 'text-lg @md:text-xl @lg:text-2xl font-medium',
-    h6: 'text-base @md:text-lg @lg:text-xl font-medium',
+    h1: 'text-4xl @md:text-5xl @lg:text-6xl font-bold leading-none',
+    h1Icon: 'text-4xl @md:text-5xl @lg:text-6xl font-bold flex items-center gap-3 leading-none',
+    h2: 'text-3xl @md:text-4xl @lg:text-5xl font-semibold leading-none',
+    h3: 'text-2xl @md:text-3xl @lg:text-4xl font-semibold leading-none',
+    h4: 'text-xl @md:text-2xl @lg:text-3xl font-medium leading-none',
+    h5: 'text-lg @md:text-xl @lg:text-2xl font-medium leading-none',
+    h6: 'text-base @md:text-lg @lg:text-xl font-medium leading-none',
     body: 'text-base',
     caption: 'text-xs leading-tight',
-    subtitle: 'text-lg font-medium',
-    gameTitle: 'text-sm leading-tight font-bold',
+    subtitle: 'text-lg font-medium leading-tight',
+    gameTitle: 'text-sm font-bold leading-none',
   };
 
   const colorStyles = {

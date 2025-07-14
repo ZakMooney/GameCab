@@ -71,7 +71,7 @@ const FavouritesDisplay = () => {
     <div className="w-full max-w-7xl mx-auto">
       <div className="">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 md:mb-8">
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-4">
             <Button
               variant={
                 isEditMode ? 'primary' : 'secondary'
@@ -177,7 +177,7 @@ const FavouritesDisplay = () => {
       </div>
 
       {favouritesCount > 0 ? (
-        <div className={`flex flex-wrap gap-4 ${
+        <div className={`flex flex-wrap gap-4 justify-center ${
           isDragMode ? 'select-none' : ''
         }`}>
           {getSortedFavourites().map((game, index) => (

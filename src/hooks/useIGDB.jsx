@@ -34,8 +34,8 @@ const useIGDB = () => {
     return makeRequest(client => client.searchGames(searchTerm, limit, categoryIds));
   }, [makeRequest]);
 
-  const getGameById = useCallback(async (id) => {
-    return makeRequest(client => client.getGameById(id));
+  const getGamesByIds = useCallback(async (gameIds, fields) => {
+    return makeRequest(client => client.getGamesByIds(gameIds, fields));
   }, [makeRequest]);
 
   const customQuery = useCallback(async (endpoint, query) => {
@@ -48,7 +48,7 @@ const useIGDB = () => {
 
   return {
     searchGames,
-    getGameById,
+    getGamesByIds,
     customQuery,
     getMostPlayedGamesWithDetails,
     loading,

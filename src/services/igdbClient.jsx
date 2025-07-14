@@ -32,6 +32,13 @@ class IGDBClient {
     return this.makeRequest(`/games/${id}`);
   }
 
+  async getGamesByIds(gameIds) {
+    return this.makeRequest('/games/by-ids', {
+      method: 'POST',
+      body: JSON.stringify({ gameIds }),
+    });
+  }
+
   async customQuery(endpoint, query) {
     return this.makeRequest(`/igdb/${endpoint}`, {
       method: 'POST',
