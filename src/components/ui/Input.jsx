@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Copy, CopyCheck, LoaderCircle } from 'lucide-react';
 
 import Typography from './Typography';
 
@@ -9,6 +9,7 @@ const Input = ({
   placeholder = "Search...", 
   className = "",
   disabled = false,
+  readOnly = false,
   onClear,
   showClearButton = true,
   size = "md",
@@ -16,9 +17,12 @@ const Input = ({
   label,
   hint,
   required = false,
-  id
+  id,
+  isCopy,
+  loading = false,
 }) => {
   const [internalValue, setInternalValue] = useState('');
+  const [copied, setCopied] = useState(false);
   
   const inputValue = value !== undefined ? value : internalValue;
   
@@ -42,6 +46,16 @@ const Input = ({
       onChange(syntheticEvent);
     } else {
       setInternalValue('');
+    }
+  };
+
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
     }
   };
   
@@ -95,8 +109,9 @@ const Input = ({
           value={inputValue}
           onChange={handleChange}
           placeholder={placeholder}
-          disabled={disabled}
+          disabled={disabled || loading}
           required={required}
+          readOnly={readOnly}
           className={`
             w-full 
             ${sizeClasses[size]}
@@ -119,11 +134,9 @@ const Input = ({
           </div>
         )}
 
-        {showClearButton && inputValue && (
-          <button
-            type="button"
-            onClick={handleClear}
-            disabled={disabled}
+
+        {loading ? ( //if loading
+          <div
             className={`
               absolute ${clearButtonPositions[size]} top-1/2 transform -translate-y-1/2 
               text-gray-400 hover:text-gray-600 dark:hover:text-gray-300
@@ -132,9 +145,52 @@ const Input = ({
               disabled:opacity-50 disabled:cursor-not-allowed
             `}
           >
-            <X className={iconSizes[size]} />
-          </button>
+            <LoaderCircle className={`animate-spin text-primary dark:text-primary-dark ${iconSizes[size]}`} />
+          </div>        
+        ) : (
+          <>
+            {isCopy ? ( // if isCopy
+              <button
+                type="button"
+                onClick={() => handleCopy(value)}
+                className={`
+                  absolute ${clearButtonPositions[size]} top-1/2 transform -translate-y-1/2 
+                  text-gray-400 hover:text-gray-600 dark:hover:text-gray-300
+                  transition-colors cursor-pointer
+                  p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-600
+                  disabled:opacity-50 disabled:cursor-not-allowed
+                `}
+              >
+                {copied ? (
+                  <CopyCheck className={`${iconSizes[size]} text-green-600 dark:text-green-400`}/>
+                ) : (
+                  <Copy className={`${iconSizes[size]}`}/>
+                )}
+              </button>
+            ) : ( // if has clear
+              <>
+                {showClearButton && inputValue && (
+                  <button
+                    type="button"
+                    onClick={handleClear}
+                    disabled={disabled || loading}
+                    className={`
+                      absolute ${clearButtonPositions[size]} top-1/2 transform -translate-y-1/2 
+                      text-gray-400 hover:text-gray-600 dark:hover:text-gray-300
+                      transition-colors cursor-pointer
+                      p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-600
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                    `}
+                  >
+                    <X className={iconSizes[size]} />
+                  </button>
+                )}
+              </>
+            )}
+          </>
         )}
+
+
       </div>
 
       {hint && (
@@ -147,6 +203,7 @@ const Input = ({
           {hint}
         </Typography>      
       )}
+
     </div>
   );
 };

@@ -103,20 +103,16 @@ export const useFavouritesStore = create(
       exportFavourites: () => {
         try {
           const { favourites } = get();
-          const exportData = {
-            favourites,
-            exportedAt: new Date().toISOString(),
-            version: '1.0',
-            count: favourites.length
-          };
           
-          const jsonString = JSON.stringify(exportData);
-          const base64String = btoa(unescape(encodeURIComponent(jsonString)));
+          // Convert IDs to integers, then to hex, then join
+          const gameIds = favourites.map(fav => parseInt(fav.id));
+          const hexString = gameIds.map(id => id.toString(16)).join('');
+          const base64String = btoa(hexString);
           
           return {
             success: true,
             data: base64String,
-            count: favourites.length
+            count: gameIds.length
           };
         } catch (error) {
           console.error('Error exporting favourites:', error);
