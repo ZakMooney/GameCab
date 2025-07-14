@@ -65,71 +65,24 @@ const FavouritesDisplay = () => {
     moveToPosition(gameId, favouritesCount - 1);
   };
 
-  if (favouritesCount === 0) {
-    return (
-      <div className="w-full max-w-4xl mx-auto p-6">
-        <div className="text-center p-12">
-          <Heart className="w-12 h-12 mb-4 text-gray-400 mx-auto" />
-          <Typography
-            variant="h2"
-            color="heading"
-            align="center"
-            className="mb-4"
-          >
-            No Favourite Games Yet
-          </Typography>
-          <div className="max-w-md mx-auto">
-            <ul className="text-sm text-gray-600 space-y-2 flex flex-col items-center">
-              <li className="flex items-start">
-                <span className="text-primary dark:text-primary-dark mr-2">•</span>
-                <Typography variant="li">
-                  Search for games and click the ❤️ to favourite them
-                </Typography>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary dark:text-primary-dark mr-2">•</span>
-                <Typography variant="li">
-                  Drag and drop to reorder your favourites
-                </Typography>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary dark:text-primary-dark mr-2">•</span>
-                <Typography variant="li">
-                  Your favourites will be saved locally on this device
-                </Typography>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary dark:text-primary-dark mr-2">•</span>
-                <Typography variant="li">
-                  Share your favourites with friends
-                </Typography>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const noFavourites = !favouritesCount > 0;
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      {/* Header Section */}
       <div className="">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 md:mb-8">
-          <div className="flex flex-wrap gap-3">
-            {/* Edit Mode Toggle */}
+          <div className="flex flex-wrap gap-4">
             <Button
               variant={
                 isEditMode ? 'primary' : 'secondary'
               }
               icon={<Pencil className="w-4 h-4" />}
               onClick={() => setIsEditMode(!isEditMode)}
-              disabled={isDragMode && (sortBy === 'custom')}
+              disabled={(isDragMode && (sortBy === 'custom')) || noFavourites}
             >
               {isEditMode ? 'Done' : 'Edit'}
             </Button>
 
-            {/* Drag Mode Toggle */}
             {sortBy === 'custom' && (
               <Button
                 variant={
@@ -137,7 +90,7 @@ const FavouritesDisplay = () => {
                 }
                 icon={<ListOrdered className="w-4 h-4" />}
                 onClick={() => setIsDragMode(!isDragMode)}
-                disabled={isEditMode}
+                disabled={isEditMode || noFavourites}
               >
                 {isDragMode ? 'Done' : 'Reorder'}
               </Button>            
@@ -151,10 +104,9 @@ const FavouritesDisplay = () => {
               ]}
               value={viewMode}
               onChange={setViewMode}
-              disabled={isDragMode}
+              disabled={isDragMode || noFavourites}
             /> */}
 
-            {/* Sort Dropdown */}
             <Select
               options={[
                 { value: 'custom', label: 'Custom Order' },
@@ -165,21 +117,41 @@ const FavouritesDisplay = () => {
               ]}
               value={sortBy}
               onChange={handleSortChange}
-              disabled={isDragMode}
+              disabled={isDragMode || noFavourites}
             />
 
-            {/* Clear All Button */}
             <Button
               variant="outlineDanger"
               onClick={() => setShowClearConfirm(true)}
-              disabled={isDragMode}
+              disabled={isDragMode || noFavourites}
             >
               Clear All
             </Button>
           </div>
         </div>
 
-        {/* Drag Mode Instructions */}
+        {isEditMode && (
+          <div className="bg-info/10 dark:bg-danger-dark/10 border border-danger dark:border-danger-dark rounded-lg p-4 mb-6">
+            <div className="flex items-start">
+              <CircleCheckBig className="w-5 h-5 text-danger dark:text-danger-dark mr-3 mt-0.5 flex-shrink-0" />
+              <div>
+                <Typography
+                  variant="body"
+                  className="text-danger dark:text-danger-dark mb-1"
+                >
+                  Editing
+                </Typography>
+                <Typography
+                  variant="body"
+                  className="text-sm text-danger dark:text-danger-dark"
+                >
+                  Click the favourite button on any game below to remove it from your collection. Your list will be saved automatically.
+                </Typography>
+              </div>
+            </div>
+          </div>
+        )}
+
         {isDragMode && (
           <div className="bg-info/10 dark:bg-info-dark/10 border border-info dark:border-info-dark rounded-lg p-4 mb-6">
             <div className="flex items-start">
@@ -189,7 +161,7 @@ const FavouritesDisplay = () => {
                   variant="body"
                   className="text-info dark:text-info-dark mb-1"
                 >
-                  Reorder Mode Active
+                  Reordering
                 </Typography>
                 <Typography
                   variant="body"
@@ -204,7 +176,78 @@ const FavouritesDisplay = () => {
 
       </div>
 
-      {/* Confirmation Modal */}
+      {favouritesCount > 0 ? (
+        <div className={`flex flex-wrap gap-4 justify-center ${
+          isDragMode ? 'select-none' : ''
+        }`}>
+          {getSortedFavourites().map((game, index) => (
+            <Fragment key={game.id}>
+              <DraggableGameCard 
+                game={game}
+                index={index}
+                isDragMode={isDragMode}
+                isEditMode={isEditMode}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                onDrop={handleDrop}
+                key={game.id}
+              />
+            </Fragment>
+          ))}
+        </div>
+      ) : (
+        <div className="w-full mx-auto p-4 pt-0">
+          <div className="text-center">
+            <Heart className="w-12 h-12 mb-4 text-gray-400 mx-auto" />
+            <Typography
+              variant="h2"
+              color="heading"
+              align="center"
+              className="mb-4"
+            >
+              No Favourite Games Yet
+            </Typography>
+            <div className="max-w-md mx-auto">
+              <ul className="text-sm text-gray-600 space-y-2 flex flex-col items-center">
+                <li className="flex items-start">
+                  <span className="text-primary dark:text-primary-dark mr-2">•</span>
+                  <Typography variant="li">
+                    Search for games and click the ❤️ to favourite them
+                  </Typography>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary dark:text-primary-dark mr-2">•</span>
+                  <Typography variant="li">
+                    Drag and drop to reorder your favourites
+                  </Typography>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary dark:text-primary-dark mr-2">•</span>
+                  <Typography variant="li">
+                    Your favourites will be saved locally on this device
+                  </Typography>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary dark:text-primary-dark mr-2">•</span>
+                  <Typography variant="li">
+                    Share your favourites with friends
+                  </Typography>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Display mode */}
+      {/* {viewMode === 'grid' ? (
+        <>
+        </>
+      ) : (
+        <>
+        </>
+      )} */}
+
       {showClearConfirm && (
         <div className="fixed inset-0 bg-black/60 bg-opacity-50 flex items-center justify-center p-4 z-50">
           <Card className="max-w-sm mx-auto">
@@ -226,72 +269,24 @@ const FavouritesDisplay = () => {
                 This will permanently remove all {favouritesCount} games from your favourites. This action cannot be undone.
               </Typography>
 
-              <div className="flex gap-3">
-              <Button
-                variant="danger"
-                icon={<Pencil className="w-4 h-4" />}
-                onClick={() => setIsEditMode(!isEditMode)}
-                disabled={isDragMode && (sortBy === 'custom')}
-              >
-                {isEditMode ? 'Done' : 'Edit'}
-              </Button>
-
-                <button
+              <div className="flex gap-4">
+                <Button
+                  variant="secondary"
                   onClick={() => setShowClearConfirm(false)}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colours"
+                  className="w-full"
                 >
                   Cancel
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="danger"
                   onClick={handleClearFavourites}
-                  className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colours"
+                  className="w-full"
                 >
                   Clear All
-                </button>
+                </Button>
               </div>
             </div>
           </Card>
-        </div>
-      )}
-
-      {/* Games Display */}
-      {viewMode === 'grid' ? (
-        <div className={`flex flex-wrap gap-4 ${
-          isDragMode ? 'select-none' : ''
-        }`}>
-          {getSortedFavourites().map((game, index) => (
-            <Fragment key={game.id}>
-              <DraggableGameCard 
-                game={game}
-                index={index}
-                isDragMode={isDragMode}
-                isEditMode={isEditMode}
-                onDragStart={handleDragStart}
-                onDragEnd={handleDragEnd}
-                onDrop={handleDrop}
-                key={game.id}
-              />
-            </Fragment>
-          ))}
-        </div>
-      ) : (
-        <div className={`flex flex-wrap gap-4 ${
-          isDragMode ? 'select-none' : ''
-        }`}>
-          {getSortedFavourites().map((game, index) => (
-            <Fragment key={game.id}>
-              <DraggableGameCard 
-                game={game}
-                index={index}
-                isDragMode={isDragMode}
-                isEditMode={isEditMode}
-                onDragStart={handleDragStart}
-                onDragEnd={handleDragEnd}
-                onDrop={handleDrop}
-                key={game.id}
-              />
-            </Fragment>
-          ))}
         </div>
       )}
 

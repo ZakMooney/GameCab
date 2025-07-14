@@ -103,20 +103,15 @@ export const useFavouritesStore = create(
       exportFavourites: () => {
         try {
           const { favourites } = get();
-          const exportData = {
-            favourites,
-            exportedAt: new Date().toISOString(),
-            version: '1.0',
-            count: favourites.length
-          };
-          
-          const jsonString = JSON.stringify(exportData);
-          const base64String = btoa(unescape(encodeURIComponent(jsonString)));
+
+          const gameIds = favourites.map(fav => parseInt(fav.id));
+          const jsonString = JSON.stringify(gameIds);
+          const base64String = btoa(jsonString);
           
           return {
             success: true,
             data: base64String,
-            count: favourites.length
+            count: gameIds.length
           };
         } catch (error) {
           console.error('Error exporting favourites:', error);
@@ -127,58 +122,22 @@ export const useFavouritesStore = create(
         }
       },
 
-      importFavourites: (base64String, options = {}) => {
+      decodeShared: (base64String) => {
         try {
-          const { favourites } = get();
-          const jsonString = decodeURIComponent(escape(atob(base64String)));
-          const importData = JSON.parse(jsonString);
+          const jsonString = atob(base64String);          
+          const gameIds = JSON.parse(jsonString);
+
+          if (!Array.isArray(gameIds)) {
+            throw new Error('invalid data format: expected an array');
+          }
           
-          if (!importData.favourites || !Array.isArray(importData.favourites)) {
-            throw new Error('Invalid import data: favourites array not found');
-          }
-
-          const validatedFavourites = importData.favourites.filter(game => {
-            return game && typeof game === 'object' && game.id && game.name;
-          });
-
-          if (validatedFavourites.length === 0) {
-            throw new Error('No valid games found in import data');
-          }
-
-          const { merge = false, preserveOrder = true } = options;
-
-          if (merge) {
-            const existingIds = new Set(favourites.map(fav => fav.id));
-            const newFavourites = validatedFavourites.filter(game => !existingIds.has(game.id));
-            
-            const favouritesWithTimestamp = newFavourites.map((game, index) => ({
-              ...game,
-              importedAt: new Date().toISOString(),
-              customOrder: favourites.length + index
-            }));
-
-            set({ favourites: [...favourites, ...favouritesWithTimestamp] });
-          } else {
-            const favouritesWithTimestamp = validatedFavourites.map((game, index) => ({
-              ...game,
-              importedAt: new Date().toISOString(),
-              customOrder: preserveOrder ? (game.customOrder ?? index) : index
-            }));
-
-            set({ favourites: favouritesWithTimestamp });
-          }
-
           return {
             success: true,
-            count: validatedFavourites.length,
-            originalCount: importData.favourites.length,
-            exportedAt: importData.exportedAt,
-            version: importData.version,
-            merged: merge
+            data: gameIds,
+            count: gameIds.length
           };
-
         } catch (error) {
-          console.error('Error importing favourites:', error);
+          console.error('error importing favourites:', error);
           return {
             success: false,
             error: error.message
@@ -264,7 +223,7 @@ export const useFavourites = () => {
     clearFavourites: store.clearFavourites,
     getFavouritesSorted: store.getFavouritesSorted,
     exportFavourites: store.exportFavourites,
-    importFavourites: store.importFavourites,
+    decodeShared: store.decodeShared,
     isLoaded: store.isLoaded,
     selectedCategories: store.selectedCategories,
     setSelectedCategories: store.setSelectedCategories

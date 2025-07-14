@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
+
 import {
   Trophy,
   Search,
@@ -12,13 +14,13 @@ import useIGDB from '../../hooks/useIGDB';
 import { useRandomLoadingMessage } from '../../helpers/Loading';
 import { useFavourites } from '../../stores/FavouritesStore';
 
-import GameCabnetLogo from '../../assets/gamecabnet_logo.svg?react';
-
 import Typography from '../ui/Typography';
 import Button from '../ui/Button';
-import ThemeToggle from '../ui/ThemeToggle';
+import Card from '../ui/Card';
+import Input from '../ui/Input';
 
 import GameCard from './GameCard';
+import PopularGames from './PopularGames';
 
 const GameSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,10 +28,10 @@ const GameSearch = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const filterRef = useRef(null);
+  const navigate = useNavigate();
 
   const {
     searchGames,
@@ -37,6 +39,7 @@ const GameSearch = () => {
     error,
   } = useIGDB();
   const { 
+    favouritesCount,
     selectedCategories, 
     setSelectedCategories,
   } = useFavourites();
@@ -152,58 +155,77 @@ const GameSearch = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <GameCabnetLogo className="text-gray-900 dark:text-white"/>
-          <Typography
-            variant="body"
-            className="mb-2"
-          >
-            Your personal gaming collection
-          </Typography>
-          <ThemeToggle />
-        </div>
-        <div className="flex flex-col flex-1 items-end max-w-[420px]">
+      <Card className="relative -mt-20 mx-8 md:mx-42 flex items-center justify-between flex-wrap gap-4">
+        <div className="flex flex-col flex-1 items-end">
 
           <div className="relative w-full flex gap-2 flex-wrap flex-col sm:flex-row">
             <div className="relative flex-1">
-              <input
-                type="text"
+              <div className="w-full flex justify-between mb-1 -mt-2 md:-mt-4">
+                <Typography
+                  variant="caption"
+                  align="right"
+                  color="muted"
+                >
+                  {hasSearched && !isSearching && searchResults.length > 0 && (
+                    <>
+                      Found {searchResults.length} game{searchResults.length !== 1 ? 's' : ''}
+                    </>
+                  )}
+                  {hasSearched && !isSearching && searchResults.length === 0 && debouncedSearchTerm.length >= 2 && (
+                      <>
+                        No games found
+                      </>
+                    )}
+                </Typography>
+
+                <Typography
+                  variant="caption"
+                  align="right"
+                  color="muted"
+                >
+                  Powered by <a href="https://www.igdb.com/" target="_blank">IGDB</a>
+                </Typography>
+              </div>
+              <Input 
                 value={searchTerm}
                 onChange={handleSearchChange}
                 placeholder="Search for games..."
-                className="w-full px-12 py-3 text-lg border border-gray-300 bg-white dark:bg-gray-700 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-base-text dark:text-base-text-dark"
+                icon={<Search className="w-5 h-5 text-gray-400"/>}
               />
-              
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
-                <Search className="w-5 h-5 text-gray-400" />
-              </div>
-
-              {searchTerm && (
-                <Button
-                  variant="ghost"
-                  onClick={handleClearSearch}
-                  icon={<X className="w-5 h-5" />}
-                  size="xs"
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
-                ></Button>              
-              )}
             </div>
+          </div>
 
+          <div className="w-full flex justify-between mt-4">
+            <div>
+              <Button
+                onClick={() => navigate('/collection')}
+                variant={favouritesCount > 0 ? 'primary' : 'secondary'}
+                size="lg"
+                className="relative"
+              >
+                Your Collection
+                {favouritesCount > 0 ? (
+                  <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 dark:bg-red-400 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                    {favouritesCount}
+                  </div>
+                ) : null}
+              </Button>              
+            </div>
+            <div>
             <div className="relative">
               <Button
                 variant="secondary"
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                 icon={<Filter className="w-5 h-5 text-gray-600" />}
-                size="md"
+                size="lg"
                 className="h-full w-full"
               >
                 <div className="relative flex items-center">
-                  <span className="block sm:hidden ml-2">
+                  <span>
                     Filters
                   </span>
                   {getSelectedCategoriesCount() > 0 && (
-                    <span className="ml-1 sm:ml-0 opacity-100 sm:opacity-60">
+                    <span className="ml-1 sm:ml-1 opacity-100 sm:opacity-60">
                       ({getSelectedCategoriesCount()})
                     </span>
                   )}  
@@ -255,104 +277,80 @@ const GameSearch = () => {
                   </div>
                 </div>
               )}
-          </div>
-
-          <div className="w-full flex justify-between">
-            <Typography
-              variant="caption"
-              align="right"
-              // color="muted"
-              className="mt-1"
-            >
-              {hasSearched && !isSearching && searchResults.length > 0 && (
-                <>
-                  Found {searchResults.length} game{searchResults.length !== 1 ? 's' : ''}
-                </>
-              )}
-              {hasSearched && !isSearching && searchResults.length === 0 && debouncedSearchTerm.length >= 2 && (
-                  <>
-                    No games found
-                  </>
-                )}
-            </Typography>
-
-            <Typography
-              variant="caption"
-              align="right"
-              color="muted"
-              className="mt-1"
-            >
-              Search powered by <a href="https://www.igdb.com/" target="_blank">IGDB</a>
-            </Typography>
+            </div>
           </div>
         </div>
-      </div>
+      </Card>
 
-
-      {isSearching || hasSearched || error ? (
-        <div className="w-full max-w-6xl mx-auto p-4">
-          {isSearching && (
-            <div className="flex flex-col items-center text-center py-12">
-              <LoaderCircle className="w-12 h-12 mb-4 text-blue-600 animate-spin" />
-              <Typography
-                variant="h3"
-                align="center"
-                className="mb-4"
-              >
-                Searching
-              </Typography>
-              <Typography
-                variant="body"
-                align="center"
-              >
-                {loadingMessage}
-              </Typography>
-            </div>
-          )}
-
-          {/* Error Message */}
-          {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <div className="flex items-center">
-                <Frown className="w-5 h-5 text-red-400 mr-2" />
-                <span className="text-red-700">Error: {error}</span>
+      <Card className="mt-8">
+        {isSearching || hasSearched || error ? (
+          <div className="w-full max-w-6xl mx-auto p-4">
+            {isSearching && (
+              <div className="flex flex-col items-center text-center py-12">
+                <LoaderCircle className="w-12 h-12 mb-4 text-blue-600 animate-spin" />
+                <Typography
+                  variant="h3"
+                  align="center"
+                  className="mb-4"
+                >
+                  Searching
+                </Typography>
+                <Typography
+                  variant="body"
+                  align="center"
+                >
+                  {loadingMessage}
+                </Typography>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Search Results */}
-          {hasSearched && !isSearching && (
-            <div>
-              {searchResults.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-                  {searchResults.map((game, index) => (
-                    <GameCard key={game.id || index} game={game} />
-                  ))}
+            {/* Error Message */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div className="flex items-center">
+                  <Frown className="w-5 h-5 text-red-400 mr-2" />
+                  <span className="text-red-700">Error: {error}</span>
                 </div>
-              ) : (
-                !isSearching && debouncedSearchTerm.length >= 2 && (
-                  <div className="flex flex-col items-center text-center py-12">
-                    <Frown className="w-12 h-12 mb-4 text-gray-400" />
-                    <Typography
-                      variant="h3"
-                      align="center"
-                      className="mb-4"
-                    >
-                      No Games Found
-                    </Typography>
-                    <Typography
-                      variant="body"
-                      align="center"
-                    >
-                      Try searching for a different game title
-                    </Typography>
+              </div>
+            )}
+
+            {/* Search Results */}
+            {hasSearched && !isSearching && (
+              <div>
+                {searchResults.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                    {searchResults.map((game, index) => (
+                      <GameCard key={game.id || index} game={game} />
+                    ))}
                   </div>
-                )
-              )}
-            </div>
-          )}
-        </div>
-      ) : null}
+                ) : (
+                  !isSearching && debouncedSearchTerm.length >= 2 && (
+                    <div className="flex flex-col items-center text-center py-12">
+                      <Frown className="w-12 h-12 mb-4 text-gray-400" />
+                      <Typography
+                        variant="h3"
+                        align="center"
+                        className="mb-4"
+                      >
+                        No Games Found
+                      </Typography>
+                      <Typography
+                        variant="body"
+                        align="center"
+                      >
+                        Try searching for a different game title
+                      </Typography>
+                    </div>
+                  )
+                )}
+              </div>
+            )}
+          </div>
+        ) : (
+          <PopularGames debouncedSearchTerm={debouncedSearchTerm} />
+        )}
+      </Card>
+
     </>
     
   );

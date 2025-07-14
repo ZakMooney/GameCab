@@ -11,7 +11,7 @@ const Switch = ({
   ...props
 }) => {
   const containerStyles = `
-    w-fit rounded-lg p-1
+    w-fit flex rounded-lg p-1
     bg-gray-100 dark:bg-gray-850
     border border-gray-300 dark:border-gray-600
     transition-all duration-200
@@ -20,9 +20,9 @@ const Switch = ({
   `.trim();
 
   const sizes = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-3 py-1 text-sm',
-    lg: 'px-4 py-2 text-base',
+    sm: 'px-1 md:px-2 py-0.5 text-xs',
+    md: 'px-1.5 md:px-3 py-1 text-sm',
+    lg: 'px-2.5 md:px-4 py-2 text-base',
   };
 
   const baseButtonStyles = `
