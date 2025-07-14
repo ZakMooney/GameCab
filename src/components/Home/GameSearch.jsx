@@ -17,6 +17,7 @@ import { useFavourites } from '../../stores/FavouritesStore';
 import Typography from '../ui/Typography';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
+import Input from '../ui/Input';
 
 import GameCard from './GameCard';
 import PopularGames from './PopularGames';
@@ -185,29 +186,13 @@ const GameSearch = () => {
                   Powered by <a href="https://www.igdb.com/" target="_blank">IGDB</a>
                 </Typography>
               </div>
-              <input
-                type="text"
+              <Input 
                 value={searchTerm}
                 onChange={handleSearchChange}
                 placeholder="Search for games..."
-                className="w-full px-12 py-3 text-lg border border-gray-300 bg-white dark:bg-gray-700 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-base-text dark:text-base-text-dark"
+                icon={<Search className="w-5 h-5 text-gray-400"/>}
               />
-              
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
-                <Search className="w-5 h-5 text-gray-400" />
-              </div>
-
-              {searchTerm && (
-                <Button
-                  variant="ghost"
-                  onClick={handleClearSearch}
-                  icon={<X className="w-5 h-5" />}
-                  size="xs"
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
-                ></Button>              
-              )}
             </div>
-
           </div>
 
           <div className="w-full flex justify-between mt-4">
