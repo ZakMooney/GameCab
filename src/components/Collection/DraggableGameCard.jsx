@@ -26,7 +26,7 @@ const DraggableGameCard = ({
       <div
         className="group rounded-r-md rounded-l-md bg-neutral-300 shadow-sm transition-all duration-200 relative overflow-hidden cursor-default min-h-[160px] w-full"
       >
-        <div className="text-center relative bg-linear-to-b from-zinc-500 via-stone-600 to-zinc-900 w-full max-w-[160px] h-full shadow-md px-2 flex justify-center items-center">
+        <div className="text-center relative bg-linear-to-b from-zinc-500 via-stone-600 to-zinc-900 w-full h-full shadow-md px-2 flex justify-center items-center">
           <Typography
             variant="gameTitle"
             align="center"
@@ -118,7 +118,7 @@ const DraggableGameCard = ({
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       className={`
-        group rounded-r-md rounded-l-md bg-neutral-300 shadow-sm 
+        aspect-3/4 group rounded-r-md rounded-l-md bg-neutral-300 shadow-sm 
         transition-all duration-200 relative overflow-hidden
         ${isDragMode ? (
           isDragging ? ('cursor-grabbing') : ('cursor-grab')
@@ -171,7 +171,7 @@ const DraggableGameCard = ({
       )}
 
       {game.cover?.url ? (
-        <div className="text-center relative w-full max-w-[160px] h-full shadow-md">
+        <div className="text-center relative w-full h-full shadow-md">
           <div className="absolute flex flex-col items-center bottom-0 opacity-0 group-hover:opacity-100 transition-opacity p-2 pt-10 bg-gradient-to-t from-neutral-900/80 via-neutral-900/80 to-neutral-900/0 w-full">
             <Typography
               variant="gameTitle"
@@ -186,14 +186,14 @@ const DraggableGameCard = ({
           <img 
             src={getCoverUrl(game.cover.url)} 
             alt={game.name}
-            className="max-w-[160px] h-auto pointer-events-none"
+            className=" h-auto w-full pointer-events-none aspect-3/4"
             onError={(e) => {
               e.target.style.display = 'none';
             }}
           />
         </div>
       ) : (
-        <div className="text-center relative bg-gradient-to-br from-green-400 to-blue-600 w-full max-w-[160px] h-full shadow-md">
+        <div className="text-center relative bg-gradient-to-br from-green-400 to-blue-600 w-full h-full shadow-md">
           <div className="absolute flex flex-col items-center w-full bottom-0 opacity-0 group-hover:opacity-100 transition-opacity p-2 pt-10 bg-gradient-to-t from-neutral-900/80 via-neutral-900/80 to-neutral-900/0">
             <Typography
               variant="gameTitle"

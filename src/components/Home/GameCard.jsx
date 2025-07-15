@@ -73,7 +73,7 @@ const GameCard = ({ game, showFavouriteButton = true }) => {
       {showFavouriteButton && (
         <button
           onClick={handleFavouriteClick}
-          className={`group absolute cursor-pointer top-3 right-3 rounded-full transition-all duration-200 z-10 hover:top-2 hover:right-2 hover:p-1 bg-neutral-500/0 hover:bg-neutral-500/60`}
+          className={`group absolute cursor-pointer top-3 right-3 rounded-full transition-all duration-200 z-auto hover:top-2 hover:right-2 hover:p-1 bg-neutral-500/0 hover:bg-neutral-500/60`}
           title={isGameFavourited ? 'Remove from favourites' : 'Add to favourites'}
         >
           {isGameFavourited ? (
