@@ -64,7 +64,7 @@ const FavouritesShared = ({
 
 
   return (
-    <div className="w-full max-w-7xl mx-auto">
+    <div className="w-full mx-auto">
       
       {sharedGamesLoading ? (
         <>
@@ -88,16 +88,16 @@ const FavouritesShared = ({
       ) : (
         <>
           {sharedGames && sharedGames.length > 0 ? (
-            <div className={`flex flex-wrap gap-4 justify-center`}>
+            <div className={`flex flex-wrap gap-4 xl:gap-8 justify-center max-w-[800px] xl:max-w-[1240px] m-auto`}>
               {sharedGames.map((game, index) => (
-                <Fragment key={game.id}>
+                <div key={game.id} className={`max-w-40 xl:max-w-[260px] w-full aspect-[3/4] flex items-center justify-center`}>
                   <DraggableGameCard 
                     game={game}
                     index={index}
                     isEditMode={true}
                     key={game.id}
                   />
-                </Fragment>
+                </div>
               ))}
             </div>
           ) : (

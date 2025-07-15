@@ -68,7 +68,6 @@ const FavouritesDisplay = () => {
   const noFavourites = !favouritesCount > 0;
 
   return (
-    // <div className="w-full max-w-7xl mx-auto">
     <div className="w-full mx-auto">
       <div className="">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4 md:mb-8">
