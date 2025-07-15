@@ -100,8 +100,8 @@ const TopNav = ({}) => {
         onClick={() => setNavOpen(false)}
         className={
           navOpen
-            ? "z-10 fixed inset-0 bg-slate-500/40 dark:bg-slate-900/40 transition-all duration-200 ease-in-out backdrop-blur-xs"
-            : "z-10 hidden bg-slate-500/10 dark:bg-slate-900/10 transition-all duration-200 ease-in-out backdrop-blur-none"
+            ? "z-20 fixed inset-0 bg-slate-500/40 dark:bg-slate-900/40 transition-all duration-200 ease-in-out backdrop-blur-xs"
+            : "z-20 hidden bg-slate-500/10 dark:bg-slate-900/10 transition-all duration-200 ease-in-out backdrop-blur-none"
         }  
       />
     </>

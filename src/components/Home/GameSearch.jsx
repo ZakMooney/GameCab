@@ -155,7 +155,7 @@ const GameSearch = () => {
 
   return (
     <>
-      <Card className="relative -mt-20 mx-8 md:mx-42 flex items-center justify-between flex-wrap gap-4">
+      <Card className="relative -mt-20 mx-0 sm:mx-16 md:mx-42 flex items-center justify-between flex-wrap gap-4">
         <div className="flex flex-col flex-1 items-end">
 
           <div className="relative w-full flex gap-2 flex-wrap flex-col sm:flex-row">
@@ -182,6 +182,7 @@ const GameSearch = () => {
                   variant="caption"
                   align="right"
                   color="muted"
+                  className="mt-1"
                 >
                   Powered by <a href="https://www.igdb.com/" target="_blank">IGDB</a>
                 </Typography>
@@ -282,7 +283,7 @@ const GameSearch = () => {
         </div>
       </Card>
 
-      <Card className="mt-8">
+      <Card className="mt-4 sm:mt-8">
         {isSearching || hasSearched || error ? (
           <div className="w-full max-w-6xl mx-auto p-4">
             {isSearching && (

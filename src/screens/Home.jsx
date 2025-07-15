@@ -12,7 +12,7 @@ const Home = () => {
         className="relative h-[12rem] md:h-[20rem] bg-gradient-to-br from-blue-600 to-purple-700 bg-center bg-cover flex items-center justify-center"
       />
 
-      <section className="px-4 md:px-8 max-w-[96rem] m-auto">
+      <section className="px-4 max-w-[96rem] m-auto">
         <GameSearch />
       </section>
     </>
