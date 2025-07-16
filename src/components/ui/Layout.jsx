@@ -1,5 +1,5 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import {
   Search,
@@ -22,7 +22,28 @@ const NavLinks = [
   },
 ];
 
+const FooterLinks = [
+  {
+    name: "Search",
+    link: "/",
+  },
+  {
+    name: "Collection",
+    link: "/collection",
+  },
+  {
+    name: "Roadmap",
+    link: "/roadmap",
+  },
+];
+
 const Layout = (props) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div className="w-full h-full my-0 mx-auto">
       <div className="flex flex-col m-auto min-h-screen">
@@ -30,7 +51,7 @@ const Layout = (props) => {
         <main role="main" className="flex-1 mb-20">
           <Outlet />
         </main>
-        <Footer />
+        <Footer links={FooterLinks} />
       </div>
     </div>
   );

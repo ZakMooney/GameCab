@@ -14,23 +14,10 @@ import NavButton from './NavButton';
 import Button from './Button';
 import Typography from './Typography';
 
-const Footer = ({}) => {
+const Footer = ({links}) => {
   const [navOpen, setNavOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const links = [
-    {
-      name: "Search",
-      link: "/",
-      icon: <Search className="w-6 h-6" />,
-    },
-    {
-      name: "Collection",
-      link: "/collection",
-      icon: <Crown className="w-6 h-6" />,
-    },
-  ];
 
   return (
     <>
@@ -64,7 +51,30 @@ const Footer = ({}) => {
           </div>
 
           <div className="hidden md:flex items-center">
-            {/* <ThemeToggle /> */}
+            {links.map((item, index) => {
+              return (
+                <Fragment key={index}>
+                  {index > 0 && (
+                    <Typography
+                      variant="caption"
+                      align="right"
+                      color="muted"
+                      className="mx-2 pointer-events-none"
+                    >
+                      •
+                    </Typography>                    
+                  )}
+                  <Typography
+                    variant="caption"
+                    align="right"
+                    onClick={() => navigate(item.link)}
+                    className="cursor-pointer hover:brightness-140 transition-all duration-200"
+                  >
+                    {item.name}
+                  </Typography>  
+                </Fragment>
+              );
+            })}
           </div>
         </div>
       </footer>
