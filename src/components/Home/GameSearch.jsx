@@ -160,33 +160,6 @@ const GameSearch = () => {
 
           <div className="relative w-full flex gap-2 flex-wrap flex-col sm:flex-row">
             <div className="relative flex-1">
-              <div className="w-full flex justify-between mb-1 -mt-2 md:-mt-4">
-                <Typography
-                  variant="caption"
-                  align="right"
-                  color="muted"
-                >
-                  {hasSearched && !isSearching && searchResults.length > 0 && (
-                    <>
-                      Found {searchResults.length} game{searchResults.length !== 1 ? 's' : ''}
-                    </>
-                  )}
-                  {hasSearched && !isSearching && searchResults.length === 0 && debouncedSearchTerm.length >= 2 && (
-                      <>
-                        No games found
-                      </>
-                    )}
-                </Typography>
-
-                <Typography
-                  variant="caption"
-                  align="right"
-                  color="muted"
-                  className="mt-1"
-                >
-                  Powered by <a href="https://www.igdb.com/" target="_blank">IGDB</a>
-                </Typography>
-              </div>
               <Input 
                 value={searchTerm}
                 onChange={handleSearchChange}

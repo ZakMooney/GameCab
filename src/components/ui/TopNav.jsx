@@ -3,8 +3,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import {
   Menu,
-  Search,
-  Crown
 } from 'lucide-react';
 
 import GameCabnetLogo from '../../assets/gamecabnet_logo.svg?react';
@@ -13,23 +11,10 @@ import ThemeToggle from "./ThemeToggle";
 import NavButton from './NavButton';
 import Button from './Button';
 
-const TopNav = ({}) => {
+const TopNav = ({links}) => {
   const [navOpen, setNavOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const links = [
-    {
-      name: "Search",
-      link: "/",
-      icon: <Search className="w-6 h-6" />,
-    },
-    {
-      name: "Collection",
-      link: "/collection",
-      icon: <Crown className="w-6 h-6" />,
-    },
-  ];
 
   return (
     <>
