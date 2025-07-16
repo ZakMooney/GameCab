@@ -43,7 +43,7 @@ const Collection = () => {
 
   if (hasShare) {
     return (
-      <div className="p-4">
+      <section className="p-4 max-w-[96rem] m-auto">
         <Card className="">
           <Typography
             variant='h3'
@@ -53,12 +53,12 @@ const Collection = () => {
           </Typography>
           <FavouritesShared decoded={decoded} decodedLoading={decodedLoading} />
         </Card>
-      </div>
+      </section>
     )
   }
 
   return (
-    <div className="p-4">
+    <section className="p-4 max-w-[96rem] m-auto">
       <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-[400px_1fr] gap-4">
         <div className="flex flex-col gap-4">
           <Card className="">
@@ -92,7 +92,7 @@ const Collection = () => {
           <FavouritesDisplay />
         </Card>
       </div>
-    </div>
+    </section>
   );
 };
 

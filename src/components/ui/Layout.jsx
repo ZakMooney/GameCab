@@ -25,13 +25,13 @@ const NavLinks = [
 const Layout = (props) => {
   return (
     <div className="w-full h-full my-0 mx-auto">
-      <TopNav links={NavLinks} />
-      <div className="flex flex-col md:flex-row m-auto">
+      <div className="flex flex-col m-auto min-h-screen">
+        <TopNav links={NavLinks} />
         <main role="main" className="flex-1 mb-20">
           <Outlet />
         </main>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }
