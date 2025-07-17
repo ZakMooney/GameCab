@@ -27,12 +27,17 @@ const TopNav = ({links}) => {
               icon={
                 <Menu className="w-6 h-6" />
               }
-              type="outline-icon"
               className="md:hidden"
             />
 
             <div className="flex">
-              <GameCabnetLogo className="transition-all duration-200 text-gray-900 dark:text-white max-h-[32px] md:max-h-[42px]"/>
+              <Button
+                onClick={() => navigate('/')}
+                variant="ghost"
+                size="xxs"
+              >
+                <GameCabnetLogo className="transition-all duration-200 text-gray-900 dark:text-white max-h-[32px] md:max-h-[42px]"/>
+              </Button>
             </div>
 
             <div className="flex p-6 md:hidden"></div>
