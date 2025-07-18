@@ -69,7 +69,7 @@ const GameCard = ({ game, showFavouriteButton = true }) => {
   const category = getCategoryName(game.category);
 
   return (
-    <Card className="flex h-full shadow-sm hover:shadow-md hover:-translate-y-1 relative" slim>
+    <Card className="flex h-full hover:shadow-xl hover:-translate-y-1 relative" slim>
       {showFavouriteButton && (
         <button
           onClick={handleFavouriteClick}

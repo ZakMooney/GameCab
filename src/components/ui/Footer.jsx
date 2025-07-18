@@ -18,7 +18,7 @@ const Footer = ({links}) => {
 
   return (
     <>
-      <footer className="flex justify-center transition-all duration-200 shadow-sm py-2 md:py-4 z-50 relative">
+      <footer className="flex justify-center transition-all duration-200 py-2 md:py-4 z-50 relative">
         <div className="flex items-center justify-between w-full max-w-[96rem] px-4">
           <div className="flex justify-between items-center w-full md:w-auto">
             <div className="flex flex-col">

@@ -31,11 +31,12 @@ const PopularGames = ({debouncedSearchTerm}) => {
 
   useEffect(() => {
     if (isReady) {
-      if (debouncedSearchTerm === '') {
+      // if (debouncedSearchTerm === '') {
         loadPopularGames();
-      }  
+      // }  
     }
-  }, [isReady, debouncedSearchTerm]);
+  // }, [isReady, debouncedSearchTerm]);
+  }, [isReady]);
 
   const loadPopularGames = async () => {
     setIsLoading(true);
