@@ -21,6 +21,8 @@ import Switch from '../ui/Switch';
 
 import DraggableGameCard from './DraggableGameCard';
 
+import Loader from '../ui/Loader';
+
 const FavouritesShared = ({
   decoded,
   decodedLoading,
@@ -69,7 +71,7 @@ const FavouritesShared = ({
       {sharedGamesLoading ? (
         <>
           <div className="flex flex-col items-center text-center py-12">
-            <LoaderCircle className="w-12 h-12 mb-4 text-blue-600 animate-spin" />
+            <Loader className="mb-4 md:mb-8" />
             <Typography
               variant="h3"
               align="center"

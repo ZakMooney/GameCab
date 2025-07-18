@@ -12,6 +12,7 @@ import useIGDB from '../../hooks/useIGDB';
 import { useRandomLoadingMessage } from '../../helpers/Loading';
 
 import Typography from '../ui/Typography';
+import Loader from '../ui/Loader';
 
 import GameCard from './GameCard';
 
@@ -58,7 +59,7 @@ const PopularGames = ({debouncedSearchTerm}) => {
     <div className="w-full">      
       {isLoading ? (
         <div className="flex flex-col items-center text-center py-12">
-          <LoaderCircle className="w-12 h-12 mb-4 text-blue-600 animate-spin" />
+          <Loader className="mb-4 md:mb-8" />
           <Typography
             variant="h3"
             align="center"

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Heart } from 'lucide-react';
 
+import { getCategoryName } from '../../helpers/IGDB';
 import { useFavourites } from '../../stores/FavouritesStore';
 
 import Typography from '../ui/Typography';
@@ -43,27 +44,6 @@ const GameCard = ({ game, showFavouriteButton = true }) => {
   const handleFavouriteClick = (e) => {
     e.stopPropagation(); // Prevent any parent click handlers
     toggleFavourite(game);
-  };
-
-    const getCategoryName = (categoryId) => {
-    const categories = {
-      0: 'Main Game',
-      1: 'DLC/Addon',
-      2: 'Expansion',
-      3: 'Bundle',
-      4: 'Standalone Expansion',
-      5: 'Mod',
-      6: 'Episode',
-      7: 'Season',
-      8: 'Remake',
-      9: 'Remaster',
-      10: 'Expanded Game',
-      11: 'Port',
-      12: 'Fork',
-      13: 'Pack',
-      14: 'Update'
-    };
-    return categories[categoryId] || 'Unknown';
   };
 
   const category = getCategoryName(game.category);
@@ -123,11 +103,11 @@ const GameCard = ({ game, showFavouriteButton = true }) => {
 
         <div className="mb-3 space-y-1">
           <StarRating rating={rating} maxStars={5} size={12} dark/>
-          <Typography
+          {/* <Typography
             variant="caption"
           >
             {category}
-          </Typography>
+          </Typography> */}
           
           {game.platforms && game.platforms.length > 0 && (
             <Typography

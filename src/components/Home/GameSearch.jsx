@@ -12,12 +12,14 @@ import {
 
 import useIGDB from '../../hooks/useIGDB';
 import { useRandomLoadingMessage } from '../../helpers/Loading';
+import { gameCategories } from '../../helpers/IGDB';
 import { useFavourites } from '../../stores/FavouritesStore';
 
 import Typography from '../ui/Typography';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
 import Input from '../ui/Input';
+import Loader from '../ui/Loader';
 
 import GameCard from './GameCard';
 import PopularGames from './PopularGames';
@@ -57,24 +59,6 @@ const GameSearch = () => {
 
   const getSelectedCategoriesCount = () => {
     return Object.values(selectedCategories).filter(Boolean).length;
-  };
-
-  const gameCategories = {
-    0: 'Main Game',
-    1: 'DLC/Addon',
-    2: 'Expansion',
-    3: 'Bundle',
-    4: 'Standalone Expansion',
-    5: 'Mod',
-    6: 'Episode',
-    7: 'Season',
-    8: 'Remake',
-    9: 'Remaster',
-    10: 'Expanded Game',
-    11: 'Port',
-    12: 'Fork',
-    13: 'Pack',
-    14: 'Update'
   };
 
   useEffect(() => {
@@ -261,7 +245,7 @@ const GameSearch = () => {
             </Typography>
             {isSearching && (
               <div className="flex flex-col items-center text-center py-12">
-                <LoaderCircle className="w-12 h-12 mb-4 text-blue-600 animate-spin" />
+                <Loader className="mb-4 md:mb-8" />
                 <Typography
                   variant="h3"
                   align="center"
