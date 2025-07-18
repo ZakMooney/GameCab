@@ -9,13 +9,10 @@ import {
 
 import GameCabnetLogo from '../../assets/gamecabnet_logo.svg?react';
 
-import ThemeToggle from "./ThemeToggle";
-import NavButton from './NavButton';
 import Button from './Button';
 import Typography from './Typography';
 
 const Footer = ({links}) => {
-  const [navOpen, setNavOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,16 +21,6 @@ const Footer = ({links}) => {
       <footer className="flex justify-center transition-all duration-200 shadow-sm py-2 md:py-4 z-50 relative">
         <div className="flex items-center justify-between w-full max-w-[96rem] px-4">
           <div className="flex justify-between items-center w-full md:w-auto">
-            <Button
-              onClick={() => setNavOpen(!navOpen)}
-              variant="secondary"
-              icon={
-                <Menu className="w-6 h-6" />
-              }
-              type="outline-icon"
-              className="md:hidden"
-            />
-
             <div className="flex flex-col">
               <GameCabnetLogo className="transition-all duration-200 text-gray-900 dark:text-white max-h-[24px]"/>
               <Typography
@@ -46,11 +33,9 @@ const Footer = ({links}) => {
               </Typography>
             </div>
 
-            <div className="flex p-6 md:hidden"></div>
-
           </div>
 
-          <div className="hidden md:flex items-center">
+          <div className="flex items-center">
             {links.map((item, index) => {
               return (
                 <Fragment key={index}>

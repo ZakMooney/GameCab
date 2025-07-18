@@ -9,16 +9,18 @@ import {
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 
+const iconBase = "w-6 h-6 transition-all duration-200";
+
 const NavLinks = [
   {
     name: "Search",
     link: "/",
-    icon: <Search className="w-6 h-6" />,
+    icon: <Search className={`${iconBase} group-hover:text-sky-500 group-hover:dark:text-sky-300`} />,
   },
   {
     name: "Collection",
     link: "/collection",
-    icon: <Crown className="w-6 h-6" />,
+    icon: <Crown className={`${iconBase} group-hover:text-orange-500 group-hover:dark:text-orange-300`} />,
   },
 ];
 

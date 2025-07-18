@@ -24,7 +24,6 @@
   --color-secondary: var(--color-gray-600);
   --color-secondary-dark: var(--color-gray-400);
 
-
   --color-info: var(--color-blue-600);
   --color-info-dark: var(--color-blue-400);
   --color-success: var(--color-green-600);
@@ -39,11 +38,13 @@
 }
 
 @utility gc-gradient {
-  background: linear-gradient(135deg, #f0f4ff 0%, #e6f2ff 30%, #dbeafe 70%, #bfdbfe 100%);
+  background: #e6f2ff;
+  background-image: linear-gradient(135deg, #f0f4ff 0%, #e6f2ff 30%, #dbeafe 70%, #bfdbfe 100%);
 }
 
 @utility gc-gradient-dark {
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)
+  background: #1a1a2e;
+  background-image: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)
 }
 
 .gc-container {

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
 import Switch from '../ui/Switch';
+import Button from '../ui/Button';
 
 const useDarkMode = () => {
   const [isDark, setIsDark] = useState(() => {
@@ -31,16 +32,19 @@ const useDarkMode = () => {
 
 const ThemeToggle = () => {
   const { isDark, toggleDarkMode } = useDarkMode();
-
   return (
-      <Switch
-        options={[
-          {value: true, label: (<Moon className="w-6 h-6" />)},
-          {value: !true, label: (<Sun className="w-6 h-6"/>)},
-        ]}
-        value={isDark}
-        onChange={toggleDarkMode}
-      />
+
+      <Button
+        onClick={toggleDarkMode}
+        variant="ghost"
+        className="group"
+      >
+        {isDark ? (
+          <Moon className="w-6 h-6 transition-all duration-200 group-hover:text-indigo-300" />
+        ) : (
+          <Sun className="w-6 h-6 transition-all duration-200 group-hover:text-amber-500"/>
+        )}
+      </Button>
     );
   }
 
