@@ -188,7 +188,7 @@ const GameSearch = () => {
             <div>
             <div className="relative">
               <Button
-                variant="secondary"
+                variant="ghost"
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                 icon={<Filter className="w-5 h-5 text-gray-600" />}
                 size="lg"

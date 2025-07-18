@@ -74,7 +74,7 @@ const FavouritesDisplay = () => {
           <div className="flex flex-wrap gap-4">
             <Button
               variant={
-                isEditMode ? 'primary' : 'secondary'
+                isEditMode ? 'primary' : 'ghost'
               }
               icon={<Pencil className="w-4 h-4" />}
               onClick={() => setIsEditMode(!isEditMode)}
@@ -86,7 +86,7 @@ const FavouritesDisplay = () => {
             {sortBy === 'custom' && (
               <Button
                 variant={
-                  isDragMode ? 'primary' : 'secondary'
+                  isDragMode ? 'primary' : 'ghost'
                 }
                 icon={<ListOrdered className="w-4 h-4" />}
                 onClick={() => setIsDragMode(!isDragMode)}
@@ -271,7 +271,7 @@ const FavouritesDisplay = () => {
 
               <div className="flex gap-4">
                 <Button
-                  variant="secondary"
+                  variant="ghost"
                   onClick={() => setShowClearConfirm(false)}
                   className="w-full"
                 >
