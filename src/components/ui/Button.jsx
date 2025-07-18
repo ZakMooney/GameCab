@@ -16,11 +16,12 @@ const Button = ({
   onClick,
   type = 'button',
   className = '',
+  active = false,
   ...props
 }) => {
   const baseStyles = `
     cursor-pointer inline-flex items-center justify-center font-medium rounded-lg
-    transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2
+    transition-all duration-200 focus:outline-none focus:ring-2
     disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none
     ${loading ? 'cursor-wait' : ''}
     ${fullWidth ? 'w-full' : ''}
@@ -36,12 +37,19 @@ const Button = ({
     secondary: `
       bg-gray-100 hover:bg-gray-200 dark:bg-gray-850 dark:hover:bg-gray-800
       text-gray-700 dark:text-gray-200
-      border border-gray-300 dark:border-gray-600
-      focus:ring-gray-300
-      active:bg-gray-300
+      focus:ring-gray-500 dark:focus:ring-gray-500
+      active:bg-gray-500 dark:active:bg-gray-500
+      hover:brightness-[110%]
     `,
     ghost: `
       bg-transparent hover:bg-gray-500/10 dark:hover:bg-gray-10/10
+      text-base-text dark:text-base-text-dark
+      border border-transparent
+      focus:ring-gray-500 dark:focus:ring-gray-500
+      hover:brightness-[110%]
+    `,
+    ghostActive: `
+      bg-gray-500/10 dark:bg-gray-10/10 hover:bg-gray-500/20 dark:hover:bg-gray-10/20
       text-base-text dark:text-base-text-dark
       border border-transparent
       focus:ring-gray-500 dark:focus:ring-gray-500
@@ -66,6 +74,13 @@ const Button = ({
       hover:brightness-[110%]
     `,
     outline: `
+      bg-transparent hover:bg-gray-500/10 dark:hover:bg-gray-200/10
+      text-gray-700 dark:text-gray-200
+      border border-gray-400 dark:border-gray-500
+      focus:ring-gray-400 dark:focus:ring-gray-300
+      hover:brightness-[110%]
+    `,
+    outlinePrimary: `
       bg-transparent hover:bg-primary/10 dark:hover:bg-primary-dark/10
       text-primary dark:text-primary-dark
       border border-primary dark:border-primary-dark

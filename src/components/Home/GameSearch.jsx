@@ -12,12 +12,14 @@ import {
 
 import useIGDB from '../../hooks/useIGDB';
 import { useRandomLoadingMessage } from '../../helpers/Loading';
+import { gameCategories } from '../../helpers/IGDB';
 import { useFavourites } from '../../stores/FavouritesStore';
 
 import Typography from '../ui/Typography';
 import Button from '../ui/Button';
 import Card from '../ui/Card';
 import Input from '../ui/Input';
+import Loader from '../ui/Loader';
 
 import GameCard from './GameCard';
 import PopularGames from './PopularGames';
@@ -57,24 +59,6 @@ const GameSearch = () => {
 
   const getSelectedCategoriesCount = () => {
     return Object.values(selectedCategories).filter(Boolean).length;
-  };
-
-  const gameCategories = {
-    0: 'Main Game',
-    1: 'DLC/Addon',
-    2: 'Expansion',
-    3: 'Bundle',
-    4: 'Standalone Expansion',
-    5: 'Mod',
-    6: 'Episode',
-    7: 'Season',
-    8: 'Remake',
-    9: 'Remaster',
-    10: 'Expanded Game',
-    11: 'Port',
-    12: 'Fork',
-    13: 'Pack',
-    14: 'Update'
   };
 
   useEffect(() => {
@@ -128,12 +112,6 @@ const GameSearch = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleClearSearch = () => {
-    setSearchTerm('');
-    setSearchResults([]);
-    setHasSearched(false);
-  };
-
   const handleCategoryToggle = (categoryId) => {
     toggleCategory(categoryId);
   };
@@ -169,13 +147,13 @@ const GameSearch = () => {
             </div>
           </div>
 
-          <div className="w-full flex justify-between mt-4">
+          <div className="w-full flex flex-col-reverse gap-4 sm:flex-row justify-between mt-4">
             <div>
               <Button
                 onClick={() => navigate('/collection')}
-                variant={favouritesCount > 0 ? 'primary' : 'secondary'}
+                variant={favouritesCount > 0 ? 'primary' : 'outline'}
                 size="lg"
-                className="relative"
+                className="relative w-full"
               >
                 Your Collection
                 {favouritesCount > 0 ? (
@@ -186,29 +164,29 @@ const GameSearch = () => {
               </Button>              
             </div>
             <div>
-            <div className="relative">
-              <Button
-                variant="secondary"
-                onClick={() => setIsFilterOpen(!isFilterOpen)}
-                icon={<Filter className="w-5 h-5 text-gray-600" />}
-                size="lg"
-                className="h-full w-full"
-              >
-                <div className="relative flex items-center">
-                  <span>
-                    Filters
-                  </span>
-                  {getSelectedCategoriesCount() > 0 && (
-                    <span className="ml-1 sm:ml-1 opacity-100 sm:opacity-60">
-                      ({getSelectedCategoriesCount()})
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  icon={<Filter className="w-5 h-5 text-gray-600" />}
+                  size="lg"
+                  className="h-full w-full"
+                >
+                  <div className="relative flex items-center">
+                    <span>
+                      Filters
                     </span>
-                  )}  
-                </div>
-              </Button>    
-            </div>
+                    {getSelectedCategoriesCount() > 0 && (
+                      <span className="ml-1 sm:ml-1 opacity-100 sm:opacity-60">
+                        ({getSelectedCategoriesCount()})
+                      </span>
+                    )}  
+                  </div>
+                </Button>    
+              </div>
               {/* Filter Dropdown */}
               {isFilterOpen && (
-                <div className="absolute top-full right-0 mt-2 w-full bg-bg-content dark:bg-bg-content-dark border border-card-border dark:border-card-border-dark rounded-lg shadow-lg z-10 p-4" ref={filterRef}>
+                <div className="absolute top-full right-0 mt-2 w-full bg-bg-content dark:bg-bg-content-dark rounded-lg shadow-2xl z-10 p-4" ref={filterRef}>
                   <div className="flex items-center justify-between mb-3">
                     <Typography
                       variant="h5"
@@ -256,12 +234,18 @@ const GameSearch = () => {
         </div>
       </Card>
 
-      <Card className="mt-4 sm:mt-8">
+      <div className="mt-4 sm:mt-8 mb-8 sm:mb-16">
         {isSearching || hasSearched || error ? (
-          <div className="w-full max-w-6xl mx-auto p-4">
+          <div className="w-full mx-auto">
+            <Typography
+              variant="h1"
+              className="mb-4"
+            >
+              Search Results
+            </Typography>
             {isSearching && (
               <div className="flex flex-col items-center text-center py-12">
-                <LoaderCircle className="w-12 h-12 mb-4 text-blue-600 animate-spin" />
+                <Loader className="mb-4 md:mb-8" />
                 <Typography
                   variant="h3"
                   align="center"
@@ -292,7 +276,7 @@ const GameSearch = () => {
             {hasSearched && !isSearching && (
               <div>
                 {searchResults.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {searchResults.map((game, index) => (
                       <GameCard key={game.id || index} game={game} />
                     ))}
@@ -321,10 +305,20 @@ const GameSearch = () => {
             )}
           </div>
         ) : (
-          <PopularGames debouncedSearchTerm={debouncedSearchTerm} />
+          null
         )}
-      </Card>
+      </div>
 
+      <div className="mt-4">
+        <Typography
+          variant="h1"
+          className="mb-4"
+        >
+          {/* <Trophy className="w-8 h-8 text-amber-600 dark:text-amber-300" /> */}
+          Most Popular
+        </Typography>
+        <PopularGames />
+      </div>
     </>
     
   );

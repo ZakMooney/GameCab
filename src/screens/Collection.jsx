@@ -43,55 +43,27 @@ const Collection = () => {
 
   if (hasShare) {
     return (
-      <section className="p-4 max-w-[96rem] m-auto">
-        <Card className="">
-          <Typography
-            variant='h3'
-            className="mb-4"
-          >
-            Shared Collection
-          </Typography>
-          <FavouritesShared decoded={decoded} decodedLoading={decodedLoading} />
-        </Card>
+      <section className="gc-container">
+        <Typography
+          variant="h1"
+          className="mb-4"
+        >
+          Shared Collection
+        </Typography>
+        <FavouritesShared decoded={decoded} decodedLoading={decodedLoading} />
       </section>
     )
   }
 
   return (
-    <section className="p-4 max-w-[96rem] m-auto">
-      <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-[400px_1fr] gap-4">
-        <div className="flex flex-col gap-4">
-          <Card className="">
-            <Typography
-              variant='h3'
-              className="mb-4"
-            >
-              Stats
-            </Typography>
-            <FavouritesStats />
-          </Card>
-
-          <Card className="">
-            <Typography
-              variant='h3'
-              className="mb-4"
-            >
-              Actions
-            </Typography>
-            <FavouritesActions />
-          </Card>
-        </div>
-
-        <Card className="">
-          <Typography
-            variant='h3'
-            className="mb-4"
-          >
-            Collection
-          </Typography>
-          <FavouritesDisplay />
-        </Card>
-      </div>
+    <section className="gc-container">
+      <Typography
+        variant="h1"
+        className="mb-4"
+      >
+        Your Collection
+      </Typography>
+      <FavouritesDisplay />
     </section>
   );
 };

@@ -5,7 +5,6 @@ import {
   ClockFading,
   Flag,
   Heart,
-
   LayoutDashboard,
   CloudCog,
   Crown,
@@ -13,6 +12,7 @@ import {
   ChevronRight,
   Database,
   AlignHorizontalSpaceAround,
+  Frown,
 } from "lucide-react";
 
 import RoadmapItem from "../components/Roadmap/RoadmapItem";
@@ -60,7 +60,7 @@ const goalItems = [
         status: "WIP",
         title: "Create Visual Interest",
         description: "Give the site some style and character",
-        progress: "20",
+        progress: "80",
         iconOverride: <Paintbrush className="w-4 h-4 z-[1]" />,
       },
       {
@@ -91,6 +91,13 @@ const goalItems = [
         description: "Take advantage of DB setup to add multiple lists etc",
         progress: "",
         iconOverride: <AlignHorizontalSpaceAround className="w-4 h-4 z-[1]" />,
+      },
+            {
+        status: "TODO",
+        title: "Add Terms",
+        description: "Add the boring legalese stuff",
+        progress: "",
+        iconOverride: <Frown className="w-4 h-4 z-[1]" />,
       },
     ],
   },

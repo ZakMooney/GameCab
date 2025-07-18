@@ -8,7 +8,6 @@ import {
 import GameCabnetLogo from '../../assets/gamecabnet_logo.svg?react';
 
 import ThemeToggle from "./ThemeToggle";
-import NavButton from './NavButton';
 import Button from './Button';
 
 const TopNav = ({links}) => {
@@ -18,12 +17,16 @@ const TopNav = ({links}) => {
 
   return (
     <>
-      <nav className="flex justify-center transition-all duration-200 bg-bg-content dark:bg-bg-content-dark border border-card-border dark:border-card-border-dark shadow-sm py-2 md:py-4 z-50 relative">
-        <div className="flex items-center justify-between w-full max-w-[96rem] px-4">
+      <nav
+        className={`flex items-center justify-between w-full relative z-50 ${navOpen && 'bg-bg-content dark:bg-bg-content-dark'}`}
+      >
+        <div
+          className={`flex items-center justify-between w-full relative gc-container`}
+        >
           <div className="flex justify-between items-center w-full md:w-auto">
             <Button
               onClick={() => setNavOpen(!navOpen)}
-              variant="secondary"
+              variant="ghost"
               icon={
                 <Menu className="w-6 h-6" />
               }
@@ -40,24 +43,35 @@ const TopNav = ({links}) => {
               </Button>
             </div>
 
-            <div className="flex p-6 md:hidden"></div>
+            <div className="md:hidden flex items-center">
+              <ThemeToggle />
+            </div>
 
           </div>
 
           <div className="hidden md:flex gap-4 w-full justify-end mr-4">
             {links.map((item, index) => {
               return (
-                <NavButton
-                  linkIcon={item.icon}
-                  linkText={item.name}
-                  linkTo={item.link}
+                <Button
                   key={index}
-                />
+                  icon={item.icon}
+                  onClick={() => navigate(item.link)}
+                  variant={
+                    location.pathname == item.link ? (
+                      'ghostActive'
+                    ) : (
+                      'ghost'
+                    )
+                  }
+                  className="group"
+                >
+                  {item.name}
+                </Button>
               );
             })}
           </div>
 
-          <div className="hidden md:flex  items-center">
+          <div className="hidden md:flex items-center">
             <ThemeToggle />
           </div>
         </div>
@@ -66,24 +80,30 @@ const TopNav = ({links}) => {
       <div
         className={
           navOpen
-            ? "md:hidden fixed top-16 left-0 right-0 z-40 p-4 opacity-100 transition-all duration-200 ease-in-out bg-bg-content dark:bg-bg-content-dark border border-card-border dark:border-card-border-dark shadow-sm"
-            : "md:hidden fixed top-0 left-0 right-0 z-40 p-4 transform -translate-y-full opacity-0 transition-all duration-200 ease-in-out bg-bg-content dark:bg-bg-content-dark border border-card-border dark:border-card-border-dark shadow-sm"
+            ? "md:hidden fixed top-16 left-0 right-0 z-40 p-4 opacity-100 transition-all duration-200 ease-in-out bg-bg-content dark:bg-bg-content-dark"
+            : "md:hidden fixed top-0 left-0 right-0 z-40 p-4 transform -translate-y-full opacity-0 transition-all duration-200 ease-in-out bg-bg-content dark:bg-bg-content-dark"
         }
       >
         <div className="flex flex-col gap-4">
           {links.map((item, index) => {
             return (
-              <NavButton
-                linkIcon={item.icon}
-                linkText={item.name}
-                linkTo={item.link}
+              <Button
                 key={index}
-              />
+                icon={item.icon}
+                onClick={() => navigate(item.link)}
+                variant={
+                  location.pathname == item.link ? (
+                    'ghostActive'
+                  ) : (
+                    'ghost'
+                  )
+                }
+                className="w-full group"
+              >
+                {item.name}
+              </Button>
             );
           })}
-          <div className="flex flex-col justify-center items-center">
-            <ThemeToggle />
-          </div>
         </div>
       </div>
       <div

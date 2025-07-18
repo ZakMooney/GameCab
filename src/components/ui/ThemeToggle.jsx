@@ -1,46 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { Sun, Moon } from 'lucide-react';
 
-import Switch from '../ui/Switch';
+import { useDarkModeStore } from '../../stores/ThemeStore';
 
-const useDarkMode = () => {
-  const [isDark, setIsDark] = useState(() => {
-
-    const saved = localStorage.getItem('darkMode');
-    if (saved !== null) {
-      return JSON.parse(saved);
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (isDark) {
-      root.setAttribute('data-theme', 'dark');
-    } else {
-      root.removeAttribute('data-theme');
-    }
-    localStorage.setItem('darkMode', JSON.stringify(isDark));
-  }, [isDark]);
-
-  const toggleDarkMode = () => setIsDark(!isDark);
-
-  return { isDark, toggleDarkMode };
-};
+import Button from '../ui/Button';
 
 const ThemeToggle = () => {
-  const { isDark, toggleDarkMode } = useDarkMode();
+  const { isDark, toggleDarkMode } = useDarkModeStore();
 
   return (
-      <Switch
-        options={[
-          {value: true, label: (<Moon className="w-6 h-6" />)},
-          {value: !true, label: (<Sun className="w-6 h-6"/>)},
-        ]}
-        value={isDark}
-        onChange={toggleDarkMode}
-      />
+      <Button
+        onClick={toggleDarkMode}
+        variant="ghost"
+        className="group"
+      >
+        {isDark ? (
+          <Moon className="w-6 h-6 transition-all duration-200 group-hover:text-indigo-300" />
+        ) : (
+          <Sun className="w-6 h-6 transition-all duration-200 group-hover:text-amber-500"/>
+        )}
+      </Button>
     );
   }
 

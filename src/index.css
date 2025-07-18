@@ -4,7 +4,7 @@
 
 @theme {
   --color-base-text: var(--color-gray-600);
-  --color-base-text-dark: var(--color-gray-400);
+  --color-base-text-dark: var(--color-gray-200);
 
   --color-heading-text: var(--color-gray-900);
   --color-heading-text-dark: var(--color-gray-100);
@@ -12,8 +12,8 @@
   --color-bg-base: var(--color-gray-50);
   --color-bg-base-dark: var(--color-gray-900);
 
-  --color-bg-content: var(--color-white);
-  --color-bg-content-dark: var(--color-gray-800);
+  --color-bg-content: oklch(0.97 0.02 259.55);
+  --color-bg-content-dark: oklch(0.26 0.04 272);
 
   --color-card-border: var(--color-gray-200);
   --color-card-border-dark: var(--color-gray-700);
@@ -23,7 +23,6 @@
 
   --color-secondary: var(--color-gray-600);
   --color-secondary-dark: var(--color-gray-400);
-
 
   --color-info: var(--color-blue-600);
   --color-info-dark: var(--color-blue-400);
@@ -36,4 +35,23 @@
 
   --color-gray-750: rgb(27, 37, 52);
   --color-gray-850: rgb(24,33,47);
+}
+
+@utility gc-gradient {
+  background: #e6f2ff;
+  background-image: linear-gradient(135deg, #f0f4ff 0%, #e6f2ff 30%, #dbeafe 70%, #bfdbfe 100%);
+}
+
+@utility gc-gradient-dark {
+  background: #1a1a2e;
+  background-image: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)
+}
+
+html {
+   font-family: Nunito Sans, sans-serif;
+   font-family: Nunito, sans-serif;
+}
+
+.gc-container {
+  @apply p-4 max-w-[40rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem] 2xl:max-w-[95rem] m-auto;
 }

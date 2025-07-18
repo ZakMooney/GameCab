@@ -3,7 +3,7 @@ import React from 'react';
 function Card(props) {
   const { className, slim } = props;
 
-  const defaultClasses = `transition-all duration-200 bg-bg-content dark:bg-bg-content-dark border border-card-border dark:border-card-border-dark rounded-2xl shadow-sm p-4`;
+  const defaultClasses = `transition-all duration-200 bg-bg-content dark:bg-bg-content-dark rounded-2xl shadow-lg p-4`;
 
   let useClasses = defaultClasses + ' ' + className;
 

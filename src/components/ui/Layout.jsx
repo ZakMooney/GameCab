@@ -1,5 +1,8 @@
 import React, {useEffect} from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { ToastContainer, Bounce } from 'react-toastify';
+
+import { useDarkModeStore } from '../../stores/ThemeStore';
 
 import {
   Search,
@@ -9,16 +12,18 @@ import {
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 
+const iconBase = "w-6 h-6 transition-all duration-200";
+
 const NavLinks = [
   {
     name: "Search",
     link: "/",
-    icon: <Search className="w-6 h-6" />,
+    icon: <Search className={`${iconBase} group-hover:text-sky-500 group-hover:dark:text-sky-300`} />,
   },
   {
     name: "Collection",
     link: "/collection",
-    icon: <Crown className="w-6 h-6" />,
+    icon: <Crown className={`${iconBase} group-hover:text-orange-500 group-hover:dark:text-orange-300`} />,
   },
 ];
 
@@ -39,21 +44,35 @@ const FooterLinks = [
 
 const Layout = (props) => {
   const { pathname } = useLocation();
+  const { isDark } = useDarkModeStore();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
-    <div className="w-full h-full my-0 mx-auto">
-      <div className="flex flex-col m-auto min-h-screen">
-        <TopNav links={NavLinks} />
-        <main role="main" className="flex-1 mb-20">
-          <Outlet />
-        </main>
-        <Footer links={FooterLinks} />
+    <>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        draggable
+        theme={isDark ? 'dark' : 'light'}
+        transition={Bounce}
+      />
+      <div className="w-full h-full my-0 mx-auto">
+        <div className="flex flex-col m-auto min-h-screen">
+          <TopNav links={NavLinks} />
+          <main role="main" className="flex-1 mb-20">
+            <Outlet />
+          </main>
+          <Footer links={FooterLinks} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
