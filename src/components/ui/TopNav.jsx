@@ -18,48 +18,48 @@ const TopNav = ({links}) => {
 
   return (
     <>
-      <nav className="flex justify-center transition-all duration-200 shadow-sm py-2 md:py-4 z-50 relative">
-        <div className="flex items-center justify-between w-full max-w-[96rem] px-4">
-          <div className="flex justify-between items-center w-full md:w-auto">
+      <nav
+        className={`flex items-center justify-between w-full relative z-50 gc-container ${navOpen && 'bg-bg-content dark:bg-bg-content-dark'}`}
+      >
+        <div className="flex justify-between items-center w-full md:w-auto">
+          <Button
+            onClick={() => setNavOpen(!navOpen)}
+            variant="secondary"
+            icon={
+              <Menu className="w-6 h-6" />
+            }
+            className="md:hidden"
+          />
+
+          <div className="flex">
             <Button
-              onClick={() => setNavOpen(!navOpen)}
-              variant="secondary"
-              icon={
-                <Menu className="w-6 h-6" />
-              }
-              className="md:hidden"
-            />
-
-            <div className="flex">
-              <Button
-                onClick={() => navigate('/')}
-                variant="ghost"
-                size="xxs"
-              >
-                <GameCabnetLogo className="transition-all duration-200 text-gray-900 dark:text-white max-h-[32px] md:max-h-[42px]"/>
-              </Button>
-            </div>
-
-            <div className="flex p-6 md:hidden"></div>
-
+              onClick={() => navigate('/')}
+              variant="ghost"
+              size="xxs"
+            >
+              <GameCabnetLogo className="transition-all duration-200 text-gray-900 dark:text-white max-h-[32px] md:max-h-[42px]"/>
+            </Button>
           </div>
 
-          <div className="hidden md:flex gap-4 w-full justify-end mr-4">
-            {links.map((item, index) => {
-              return (
-                <NavButton
-                  linkIcon={item.icon}
-                  linkText={item.name}
-                  linkTo={item.link}
-                  key={index}
-                />
-              );
-            })}
-          </div>
+          <div className="flex p-6 md:hidden"></div>
 
-          <div className="hidden md:flex  items-center">
-            <ThemeToggle />
-          </div>
+        </div>
+
+        <div className="hidden md:flex gap-4 w-full justify-end mr-4">
+          {links.map((item, index) => {
+            return (
+              <NavButton
+                linkIcon={item.icon}
+                linkText={item.name}
+                linkTo={item.link}
+                key={index}
+              />
+            );
+          })}
+        </div>
+
+        <div className="hidden md:flex  items-center">
+          <ThemeToggle />
         </div>
       </nav>
 

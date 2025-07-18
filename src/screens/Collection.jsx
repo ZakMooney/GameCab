@@ -43,7 +43,7 @@ const Collection = () => {
 
   if (hasShare) {
     return (
-      <section className="p-4 max-w-[96rem] m-auto">
+      <section className="gc-container">
         <Card className="">
           <Typography
             variant='h3'
@@ -58,9 +58,10 @@ const Collection = () => {
   }
 
   return (
-    <section className="p-4 max-w-[96rem] m-auto">
-      <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-[400px_1fr] gap-4">
-        <div className="flex flex-col gap-4">
+    <section className="gc-container">
+      {/* <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-[400px_1fr] gap-4"> */}
+      <div className="grid grid-cols-1 gap-4">
+        {/* <div className="flex flex-col gap-4">
           <Card className="">
             <Typography
               variant='h3'
@@ -80,7 +81,7 @@ const Collection = () => {
             </Typography>
             <FavouritesActions />
           </Card>
-        </div>
+        </div> */}
 
         <Card className="">
           <Typography

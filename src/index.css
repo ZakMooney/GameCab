@@ -37,3 +37,15 @@
   --color-gray-750: rgb(27, 37, 52);
   --color-gray-850: rgb(24,33,47);
 }
+
+@utility gc-gradient {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e6f2ff 30%, #dbeafe 70%, #bfdbfe 100%);
+}
+
+@utility gc-gradient-dark {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)
+}
+
+.gc-container {
+  @apply p-4 max-w-[40rem] md:max-w-[50rem] lg:max-w-[60rem] xl:max-w-[80rem] 2xl:max-w-[95rem] m-auto;
+}
