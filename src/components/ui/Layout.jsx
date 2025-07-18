@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ToastContainer, Bounce } from 'react-toastify';
 
+import { useDarkModeStore } from '../../stores/ThemeStore';
+
 import {
   Search,
   Crown
@@ -42,6 +44,7 @@ const FooterLinks = [
 
 const Layout = (props) => {
   const { pathname } = useLocation();
+  const { isDark } = useDarkModeStore();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -57,7 +60,7 @@ const Layout = (props) => {
         closeOnClick={false}
         rtl={false}
         draggable
-        // theme="light"
+        theme={isDark ? 'dark' : 'light'}
         transition={Bounce}
       />
       <div className="w-full h-full my-0 mx-auto">

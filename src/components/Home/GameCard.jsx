@@ -103,11 +103,11 @@ const GameCard = ({ game, showFavouriteButton = true }) => {
 
         <div className="mb-3 space-y-1">
           <StarRating rating={rating} maxStars={5} size={12} dark/>
-          {/* <Typography
+          <Typography
             variant="caption"
           >
             {category}
-          </Typography> */}
+          </Typography>
           
           {game.platforms && game.platforms.length > 0 && (
             <Typography
