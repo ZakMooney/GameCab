@@ -236,7 +236,7 @@ const GameSearch = () => {
 
       <div className="mt-4 sm:mt-8 mb-8 sm:mb-16">
         {isSearching || hasSearched || error ? (
-          <div className="w-full max-w-6xl mx-auto">
+          <div className="w-full mx-auto">
             <Typography
               variant="h1"
               className="mb-4"
@@ -276,7 +276,7 @@ const GameSearch = () => {
             {hasSearched && !isSearching && (
               <div>
                 {searchResults.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {searchResults.map((game, index) => (
                       <GameCard key={game.id || index} game={game} />
                     ))}

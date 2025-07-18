@@ -199,7 +199,7 @@ const FavouritesDisplay = () => {
       </div>
 
       {favouritesCount > 0 ? (
-        <div className={`flex flex-wrap gap-4 xl:gap-8 justify-start max-w-[1240px] m-auto md:mt-8 ${
+        <div className={`flex flex-wrap gap-4 xl:gap-8 justify-start w-full m-auto md:mt-8 ${
           isDragMode ? 'select-none' : ''
         }`}>
           {getSortedFavourites().map((game, index) => (
