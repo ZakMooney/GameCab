@@ -90,7 +90,7 @@ const FavouritesShared = ({
       ) : (
         <>
           {sharedGames && sharedGames.length > 0 ? (
-            <div className={`flex flex-wrap gap-4 xl:gap-8 justify-center max-w-[800px] xl:max-w-[1240px] m-auto`}>
+            <div className={`flex flex-wrap gap-4 xl:gap-8 justify-start m-auto`}>
               {sharedGames.map((game, index) => (
                 <div key={game.id} className={`max-w-40 xl:max-w-[260px] w-full aspect-[3/4] flex items-center justify-center`}>
                   <DraggableGameCard 

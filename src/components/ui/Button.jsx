@@ -74,6 +74,13 @@ const Button = ({
       hover:brightness-[110%]
     `,
     outline: `
+      bg-transparent hover:bg-gray-500/10 dark:hover:bg-gray-200/10
+      text-gray-700 dark:text-gray-200
+      border border-gray-400 dark:border-gray-500
+      focus:ring-gray-400 dark:focus:ring-gray-300
+      hover:brightness-[110%]
+    `,
+    outlinePrimary: `
       bg-transparent hover:bg-primary/10 dark:hover:bg-primary-dark/10
       text-primary dark:text-primary-dark
       border border-primary dark:border-primary-dark

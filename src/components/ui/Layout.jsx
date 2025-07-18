@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { ToastContainer, Bounce } from 'react-toastify';
 
 import {
   Search,
@@ -47,15 +48,28 @@ const Layout = (props) => {
   }, [pathname]);
 
   return (
-    <div className="w-full h-full my-0 mx-auto">
-      <div className="flex flex-col m-auto min-h-screen">
-        <TopNav links={NavLinks} />
-        <main role="main" className="flex-1 mb-20">
-          <Outlet />
-        </main>
-        <Footer links={FooterLinks} />
+    <>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        draggable
+        // theme="light"
+        transition={Bounce}
+      />
+      <div className="w-full h-full my-0 mx-auto">
+        <div className="flex flex-col m-auto min-h-screen">
+          <TopNav links={NavLinks} />
+          <main role="main" className="flex-1 mb-20">
+            <Outlet />
+          </main>
+          <Footer links={FooterLinks} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

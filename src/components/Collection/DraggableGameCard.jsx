@@ -118,14 +118,14 @@ const DraggableGameCard = ({
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       className={`
-        aspect-3/4 group rounded-r-md rounded-l-md bg-neutral-300 shadow-sm 
+        aspect-3/4 group rounded-r-md rounded-l-md bg-neutral-300 shadow-lg 
         transition-all duration-200 relative overflow-hidden
         ${isDragMode ? (
           isDragging ? ('cursor-grabbing') : ('cursor-grab')
         ) : ('cursor-default')}
-        ${isDragging ? 'opacity-50 scale-105 shadow-lg transform rotate-2' : ''}
+        ${isDragging ? 'opacity-50 scale-105 shadow-2xl transform rotate-2' : ''}
         ${isDragOver ? 'ring-2 ring-blue-500 ring-opacity-50 transform scale-105' : ''}
-        ${!isDragging && !isDragOver ? 'hover:shadow-md hover:-translate-y-1' : ''}
+        ${!isDragging && !isDragOver ? 'hover:shadow-xl hover:-translate-y-1' : ''}
       `}
     >
       {isDragMode ? (

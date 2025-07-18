@@ -151,7 +151,7 @@ const GameSearch = () => {
             <div>
               <Button
                 onClick={() => navigate('/collection')}
-                variant={favouritesCount > 0 ? 'primary' : 'ghost'}
+                variant={favouritesCount > 0 ? 'primary' : 'outline'}
                 size="lg"
                 className="relative w-full"
               >
