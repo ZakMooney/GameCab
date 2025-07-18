@@ -18,7 +18,7 @@ const TopNav = ({links}) => {
 
   return (
     <>
-      <nav className="flex justify-center transition-all duration-200 bg-bg-content dark:bg-bg-content-dark border border-card-border dark:border-card-border-dark shadow-sm py-2 md:py-4 z-50 relative">
+      <nav className="flex justify-center transition-all duration-200 shadow-sm py-2 md:py-4 z-50 relative">
         <div className="flex items-center justify-between w-full max-w-[96rem] px-4">
           <div className="flex justify-between items-center w-full md:w-auto">
             <Button

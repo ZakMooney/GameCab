@@ -256,7 +256,7 @@ const GameSearch = () => {
         </div>
       </Card>
 
-      <Card className="mt-4 sm:mt-8">
+      <div className="mt-4 sm:mt-8">
         {isSearching || hasSearched || error ? (
           <div className="w-full max-w-6xl mx-auto p-4">
             {isSearching && (
@@ -323,7 +323,7 @@ const GameSearch = () => {
         ) : (
           <PopularGames debouncedSearchTerm={debouncedSearchTerm} />
         )}
-      </Card>
+      </div>
 
     </>
     
